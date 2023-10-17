@@ -1,6 +1,7 @@
 import Container from "@/components/Container";
 import Image from "next/image";
 import DynamicMenu from "./DynamicMenu";
+import MobileMenu from "./MobileMenu";
 
 const Navbar = () => {
   return (
@@ -17,8 +18,12 @@ const Navbar = () => {
             />
           </div>
           {/* Menus */}
-          <div></div>
-          <DynamicMenu />
+          <div className="hidden md:block">
+            <DynamicMenu />
+          </div>
+          <div className="md:hidden">
+              <MobileMenu />
+          </div>
         </div>
       </Container>
     </header>
