@@ -1,5 +1,5 @@
 import { IHomeBannerContent } from "@/types";
-import { Button, FloatButton } from "antd";
+import { Button } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,21 +9,22 @@ interface CarouselItemsProps {
 
 const CarouselItems = ({ item }: CarouselItemsProps) => {
   return (
-    <div className="md:flex md:min-h-[calc(100vh-95px)] justify-between mx-auto w-full items-center">
-      <div className="space-y-4">
+    <div className="flex flex-col md:flex-row gap-4 md:min-h-[calc(100vh-95px)] justify-between mx-auto w-full items-center">
+      <div className="space-y-4 text-center md:text-left">
         <h2 className="text-5xl font-bold">{item.title}</h2>
         <p className="text-xl font-light">{item.content}</p>
         <Button type="primary" size="large">
-          <Link href={"/services"}>Our Services</Link>
+          <Link href={"/services"}>Learn More</Link>
         </Button>
       </div>
-      <div>
+      <div className="relative">
         <Image
           src={item.image}
-          width={600}
-          height={600}
           alt={item.title}
-          priority
+          fetchPriority="high"
+          width={500}
+          height={500}
+          layout="responsive"
         />
       </div>
     </div>

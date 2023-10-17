@@ -20,14 +20,6 @@ async function getData() {
 const Header = async () => {
   const data = await getData();
 
-  const contentStyle: React.CSSProperties = {
-    height: "160px",
-    color: "#fff",
-    lineHeight: "160px",
-    textAlign: "center",
-    background: "#364d79",
-  };
-
   return (
     <Carousel effect="fade" dots={false} autoplay>
       {data.map((item: any) => (
