@@ -1,48 +1,57 @@
-"use client";
+'use-client'
+import { ReactElement, useEffect } from 'react'
+import {
+  useForm,
+  FormProvider,
+  SubmitHandler,
+  FieldValues,
+  DefaultValues,
+} from 'react-hook-form'
 
-import { ReactElement, useEffect } from "react";
-import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
+type FormConfig<T> = {
+  defaultValues?: DefaultValues<T>
+  resolver?: any
+}
 
-type FormConfig = {
-  defaultValues?: Record<string, any>;
-  resolver?: any;
-};
+type FormProps<T extends FieldValues> = {
+  children?: React.ReactNode | ReactElement
+  onSubmit: SubmitHandler<T>
+  defaultValues?: DefaultValues<T>
+} & FormConfig<T>
 
-type FormProps = {
-  children?: React.ReactNode | ReactElement;
-  submithandler: SubmitHandler<any>;
-} & FormConfig;
-
-const Form = ({
+function Form<T extends FieldValues>({
   children,
-  submithandler,
+  onSubmit,
   defaultValues,
   resolver,
-}: FormProps) => {
-  const formConfig: FormConfig = {};
+}: FormProps<T>) {
+  const formConfig: FormConfig<T> = {}
 
-  if (!!defaultValues) formConfig["defaultValues"] = defaultValues;
+  if (defaultValues) {
+    formConfig.defaultValues = defaultValues
+  }
 
-  if (!!resolver) formConfig["resolver"] = resolver;
+  if (resolver) {
+    formConfig.resolver = resolver
+  }
 
-  const methods = useForm<FormProps>(formConfig);
+  const methods = useForm<T>(formConfig)
+  const { handleSubmit, reset } = methods
 
-  const { handleSubmit, reset } = methods;
-
-  const onSubmit = (data: any) => {
-    submithandler(data);
-    reset();
-  };
+  const handleFormSubmit = (data: T) => {
+    onSubmit(data)
+    reset()
+  }
 
   useEffect(() => {
-    reset(defaultValues);
-  }, [defaultValues, reset, methods]);
+    reset(defaultValues)
+  }, [defaultValues, reset])
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>{children}</form>
+      <form onSubmit={handleSubmit(handleFormSubmit)}>{children}</form>
     </FormProvider>
-  );
-};
+  )
+}
 
-export default Form;
+export default Form
