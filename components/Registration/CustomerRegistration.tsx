@@ -8,6 +8,10 @@ import { useRouter } from 'next/navigation'
 import { SubmitHandler } from 'react-hook-form'
 import { CustomerSignUpFormType } from '@/schemas/user'
 import { useCustomerSignUpMutation } from '@/redux/api/authApi'
+import Image from 'next/image'
+import LoginImage from '@/assets/login-image.svg'
+import FormTextArea from '../Forms/FormTextArea'
+
 const CustomerRegistration = () => {
  const [customerSignUp, { isLoading }] = useCustomerSignUpMutation()
 
@@ -42,6 +46,9 @@ const CustomerRegistration = () => {
       }}
       gutter={{ xs: 24, xl: 8, lg: 8, md: 24 }}
     >
+      <Col sm={12} md={16} lg={10}>
+        <Image priority src={LoginImage} alt='login image' width={500} />
+      </Col>
       <Col sm={24} md={8} lg={8}>
         <h1
           style={{
@@ -147,9 +154,7 @@ const CustomerRegistration = () => {
                 margin: '15px 0',
               }}
             >
-              <FormInput
-                type='text'
-                size='large'
+              <FormTextArea
                 name='customer.address'
                 label='address'
               />
@@ -165,17 +170,3 @@ const CustomerRegistration = () => {
 }
 
 export default CustomerRegistration
-
-// {
-//     "user": {
-//         "username": "noor",
-//         "password": "noor011"
-//     },
-//     "customer": {
-//         "firstName": "KamrulSaad",
-//         "lastName": "Huda",
-//         "email": "skamrul2680@gmail.com",
-//         "contactNo": "sdrgsgd",
-//         "address": "Dhaka"
-//     }
-// }

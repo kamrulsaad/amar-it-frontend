@@ -2,8 +2,8 @@ import Login from "@/components/Login/Login";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Login - University Management System",
-  description: "University Management System - Programming Hero",
+  title: "Login - Amar IT",
+  description: "Login to Amar IT",
 };
 
 const LoginPage = () => {
