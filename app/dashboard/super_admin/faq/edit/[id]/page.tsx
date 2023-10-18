@@ -21,10 +21,10 @@ const EditFaq = ({
   const onSubmit: SubmitHandler<UpdateFaqFormType> = async (data) => {
     message.loading('udpdating.....')
     try {
-      const response = await updateFaq({ data, id }).unwrap()
+      const response = await updateFaq({ id, ...data }).unwrap()
 
       if (!!response) {
-        router.push('/dashboard/super_admin/faq')
+        // router.push('/dashboard/super_admin/faq')
         message.success('Faq Updated Successfully')
       }
     } catch (error) {

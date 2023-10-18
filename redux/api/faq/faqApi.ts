@@ -28,27 +28,28 @@ export const faqApi = baseApi.injectEndpoints({
       providesTags: [TagTypes.faq],
     }),
     updateFaq: build.mutation({
-      query: ({ faqData, id }) => ({
+      query: ({ id, ...patch }) => ({
         url: `${FAQ_URL}/${id}`,
-        method: 'PUT',
-        data: faqData,
+        method: 'PATCH',
+        body: patch,
+        
       }),
-      onQueryStarted: async ({ faqData, id }, { dispatch, queryFulfilled }) => {
-        dispatch(
-          faqApi.util.updateQueryData('getFaq', id, (draft) => {
-            Object.assign(draft, faqData)
-          })
-        )
-        try {
-          await queryFulfilled
-        } catch {
-          dispatch(
-            faqApi.util.updateQueryData('getFaq', id, (draft) => {
-              Object.assign(draft, { id })
-            })
-          )
-        }
-      },
+      // onQueryStarted: async ({ id, patch }, { dispatch, queryFulfilled }) => {
+      //   dispatch(
+      //     faqApi.util.updateQueryData('getFaq', id, (draft) => {
+      //       Object.assign(draft, patch)
+      //     })
+      //   )
+      //   try {
+      //     await queryFulfilled
+      //   } catch {
+      //     dispatch(
+      //       faqApi.util.updateQueryData('getFaq', id, (draft) => {
+      //         Object.assign(draft, { id })
+      //       })
+      //     )
+      //   }
+      // },
       invalidatesTags: [TagTypes.faq],
     }),
     deleteFaq: build.mutation({
