@@ -18,12 +18,10 @@ const Navbar = () => {
             />
           </div>
           {/* Menus */}
-          <div className="hidden md:block">
+          <div className="mobile-hidden">
             <DynamicMenu />
           </div>
-          <div className="md:hidden">
-              <MobileMenu />
-          </div>
+          <MobileMenu />
         </div>
       </Container>
     </header>
