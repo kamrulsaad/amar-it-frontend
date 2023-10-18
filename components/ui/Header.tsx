@@ -1,21 +1,12 @@
 import { Avatar, Button, Dropdown, Layout, MenuProps, Row, Space } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import { getUserInfo, removeUserInfo } from "@/services/auth.service";
-import { authKey } from "@/constants/storageKey";
-import { useRouter } from "next/navigation";
+import { getUserInfo } from "@/services/auth.service";
 import useLogOut from "@/utils/logOut";
 
 const { Header: AntHeader } = Layout;
 
 const Header = () => {
-//   const router = useRouter();
-
-//   const logOut = () => {
-//     removeUserInfo(authKey);
-//     router.push("/login");
-//   };
-
-    const logOut = useLogOut();
+  const logOut = useLogOut();
 
   const items: MenuProps["items"] = [
     {
