@@ -33,12 +33,15 @@ instance.interceptors.response.use(
     return responseObject;
   },
   function (error) {
-    const responseObject : IGenericErrorResponse = {
-      statusCode: error?.response?.data?.statusCode || 500,
-      message: error?.response?.data?.message || "Something went wrong",
-      errorMessages: error?.response?.data?.errorMessages,
-    };
-    return responseObject;
+    if (error?.response?.status === 403) { }
+    else {
+      const responseObject: IGenericErrorResponse = {
+        statusCode: error?.response?.data?.statusCode || 500,
+        message: error?.response?.data?.message || "Something went wrong",
+        errorMessages: error?.response?.data?.errorMessages,
+      };
+      return Promise.reject(error);
+    }
   }
 );
 
