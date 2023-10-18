@@ -60,7 +60,7 @@ const EditFaq = ({
           </Col>
         </Row>
         <Button loading={isLoading} type='primary' htmlType='submit'>
-          add
+          update
         </Button>
       </Form>
     </div>
