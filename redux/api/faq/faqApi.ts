@@ -28,7 +28,7 @@ export const faqApi = baseApi.injectEndpoints({
       providesTags: [TagTypes.faq],
     }),
     updateFaq: build.mutation({
-      query: ({ faqData, id }) => ({
+      query: ({ id, ...faqData }) => ({
         url: `${FAQ_URL}/${id}`,
         method: 'PATCH',
         data: faqData,

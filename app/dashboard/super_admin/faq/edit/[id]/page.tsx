@@ -20,7 +20,7 @@ const EditFaq = ({
   const router = useRouter()
   const onSubmit: SubmitHandler<UpdateFaqFormType> = async (data) => {
     try {
-      const response = await updateFaq({ data, id }).unwrap()
+      const response = await updateFaq({ id, ...data }).unwrap()
 
       if (!!response) {
         router.push('/dashboard/super_admin/faq')
