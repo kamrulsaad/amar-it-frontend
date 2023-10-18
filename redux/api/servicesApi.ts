@@ -14,7 +14,7 @@ export const faqApi = baseApi.injectEndpoints({
       invalidatesTags: [TagTypes.services],
     }),
 
-    getFaqs: build.query({
+    getServices: build.query({
       query: () => ({
         url: `${SERVICES_URL}`,
         method: "GET",
@@ -22,7 +22,7 @@ export const faqApi = baseApi.injectEndpoints({
       providesTags: [TagTypes.services],
     }),
 
-    getFaq: build.query({
+    getService: build.query({
       query: (faqId) => ({
         url: `${SERVICES_URL}/${faqId}`,
         method: "GET",
@@ -30,15 +30,15 @@ export const faqApi = baseApi.injectEndpoints({
       providesTags: [TagTypes.services],
     }),
 
-    updateFaq: build.mutation({
-      query: ({ faqData, id }) => ({
+    updateService: build.mutation({
+      query: ({ id, ...faqData }) => ({
         url: `${SERVICES_URL}/${id}`,
-        method: "PUT",
+        method: "PATCH",
         data: faqData,
       }),
       onQueryStarted: async ({ faqData, id }, { dispatch, queryFulfilled }) => {
         dispatch(
-          faqApi.util.updateQueryData("getFaq", id, (draft) => {
+          faqApi.util.updateQueryData("getService", id, (draft) => {
             Object.assign(draft, faqData);
           })
         );
@@ -46,7 +46,7 @@ export const faqApi = baseApi.injectEndpoints({
           await queryFulfilled;
         } catch {
           dispatch(
-            faqApi.util.updateQueryData("getFaq", id, (draft) => {
+            faqApi.util.updateQueryData("getService", id, (draft) => {
               Object.assign(draft, { id });
             })
           );
@@ -55,7 +55,7 @@ export const faqApi = baseApi.injectEndpoints({
       invalidatesTags: [TagTypes.services],
     }),
 
-    deleteFaq: build.mutation({
+    deleteService: build.mutation({
       query: (faqId) => ({
         url: `${SERVICES_URL}/${faqId}`,
         method: "DELETE",
@@ -67,8 +67,8 @@ export const faqApi = baseApi.injectEndpoints({
 
 export const {
   useCreateServiceMutation,
-  useGetFaqsQuery,
-  useGetFaqQuery,
-  useUpdateFaqMutation,
-  useDeleteFaqMutation,
+  useDeleteServiceMutation,
+  useGetServiceQuery,
+  useGetServicesQuery,
+  useUpdateServiceMutation,
 } = faqApi;

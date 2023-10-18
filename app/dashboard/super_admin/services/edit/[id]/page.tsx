@@ -6,27 +6,38 @@ import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import { useRouter } from "next/navigation";
 import { Button, Col, Row, message } from "antd";
 import { SubmitHandler } from "react-hook-form";
-import { useCreateServiceMutation } from "@/redux/api/servicesApi";
+import {
+  useGetServiceQuery,
+  useUpdateServiceMutation,
+} from "@/redux/api/servicesApi";
 import FormTextArea from "@/components/Forms/FormTextArea";
 import FormMultiSelect from "@/components/Forms/FormMultiSelect";
 import {
-  CreateServiceFormType,
-  createServiceResolver,
+  UpdateServiceFormType,
+  updateServiceResolver,
 } from "@/schemas/services";
+import FormSelectField from "@/components/Forms/FormSelectField";
 
-const CreateServicePage = () => {
-  const [createService, { isLoading }] = useCreateServiceMutation();
+interface EditServicePageProps {
+  params: {
+    id: string;
+  };
+}
+
+const EditServicePage = ({ params }: EditServicePageProps) => {
+  const { id } = params;
+  const [updateService, { isLoading }] = useUpdateServiceMutation();
+  const { data } = useGetServiceQuery(id);
   const router = useRouter();
 
-  const onSubmit: SubmitHandler<CreateServiceFormType> = async (data) => {
+  const onSubmit: SubmitHandler<UpdateServiceFormType> = async (data) => {
     try {
       // @ts-ignore
       data.charge = Number(data.charge);
-
-      const response = await createService({ data }).unwrap();
+      const response = await updateService({ id, ...data }).unwrap();
       if (!!response) {
         router.push("/dashboard/super_admin/services");
-        message.success("Service Created Successfully");
+        message.success("Service Updated Successfully");
       }
     } catch (error: any) {
       for (const err of error.data.errorMessages) {
@@ -37,16 +48,33 @@ const CreateServicePage = () => {
 
   const base = "super_admin";
 
+  const statusOptions = [
+    { label: "Active", value: "active" },
+    { label: "Upcoming", value: "upcoming" },
+  ];
+
+  const defaultValues = {
+    title: data?.title,
+    charge: String(data?.charge),
+    description: data?.description,
+    features: data?.features,
+    status: data?.status,
+  };
+
   return (
     <div>
       <UMBreadCrumb
         items={[
           { label: `${base}`, link: `/dashboard/${base}` },
-          { label: "faq", link: `/dashboard/${base}/services` },
+          { label: "services", link: `/dashboard/${base}/services` },
         ]}
       />
-      <h1>Create Service</h1>
-      <Form onSubmit={onSubmit} resolver={createServiceResolver}>
+      <h1>Update Service</h1>
+      <Form
+        onSubmit={onSubmit}
+        resolver={updateServiceResolver}
+        defaultValues={defaultValues}
+      >
         <Row gutter={{ xs: 24, xl: 8, lg: 8, md: 24 }}>
           <Col span={8} style={{ margin: "10px 0" }}>
             <FormInput name="title" label="Title" />
@@ -67,6 +95,15 @@ const CreateServicePage = () => {
             <FormMultiSelect name="features" label="Features" options={[]} />
           </Col>
         </Row>
+        <Row gutter={{ xs: 24, xl: 8, lg: 8, md: 24 }}>
+          <Col span={8} style={{ margin: "10px 0" }}>
+            <FormSelectField
+              name="status"
+              label="Status"
+              options={statusOptions}
+            />
+          </Col>
+        </Row>
         <Button loading={isLoading} type="primary" htmlType="submit">
           Submit
         </Button>
@@ -75,4 +112,4 @@ const CreateServicePage = () => {
   );
 };
 
-export default CreateServicePage;
+export default EditServicePage;

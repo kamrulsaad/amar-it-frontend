@@ -23,6 +23,7 @@ const updateServiceSchema = z.object({
   description: z.string().optional(),
   charge: z.string().optional(),
   features: z.array(z.string()).optional(),
+  status: z.enum(["active", "upcoming"]).optional(),
 });
 
 export type CreateServiceFormType = z.infer<typeof createServiceSchema>;
