@@ -24,7 +24,7 @@ const CarouselItems = ({ item }: CarouselItemsProps) => {
           fetchPriority="high"
           width={500}
           height={500}
-          layout="responsive"
+          layout="intrinsic"
         />
       </div>
     </div>

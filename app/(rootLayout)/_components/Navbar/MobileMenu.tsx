@@ -22,16 +22,9 @@ const MobileMenu = () => {
       <Button type="primary" onClick={showDrawer}>
         <MenuFoldOutlined />
       </Button>
-      <Drawer placement="right" onClose={onClose} visible={visible}>
+      <Drawer placement="right" onClose={onClose} open={visible}>
         <nav>
-          {/* <ul>
-                
-                <li><NavLink onClick={onClose} to="/demo/react/antdesign/grocery/">Home</NavLink></li>
-                <li><NavLink onClick={onClose} to="/demo/react/antdesign/grocery/about">About</NavLink></li>
-                <li><NavLink onClick={onClose} to="/demo/react/antdesign/grocery/shop">Shop</NavLink></li>
-                <li><NavLink onClick={onClose} to="/demo/react/antdesign/grocery/faq">FAQ</NavLink></li>
-                <li><NavLink onClick={onClose} to="/demo/react/antdesign/grocery/contact">Contact</NavLink></li>
-              </ul> */}
+          
         </nav>
       </Drawer>
     </div>
