@@ -18,10 +18,13 @@ const UMBreadCrumb = ({
         </Link>
       ),
     },
+    {
+      title: <Link href="/dashboard">dashboard</Link>,
+    },
     ...items.map((item) => {
       return {
         title: item.link ? (
-          <Link href={item.link}>{item.label}</Link>
+          <Link href={`/dashboard${item.link}`}>{item.label}</Link>
         ) : (
           <span>{item.label}</span>
         ),

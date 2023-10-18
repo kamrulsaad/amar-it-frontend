@@ -23,7 +23,7 @@ const CreateServicePage = () => {
       // @ts-ignore
       data.charge = Number(data.charge);
 
-      const response = await createService({ data }).unwrap();
+      const response = await createService({ ...data }).unwrap();
       if (!!response) {
         router.push("/dashboard/super_admin/services");
         message.success("Service Created Successfully");
