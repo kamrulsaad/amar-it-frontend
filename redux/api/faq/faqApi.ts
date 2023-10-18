@@ -30,7 +30,7 @@ export const faqApi = baseApi.injectEndpoints({
     updateFaq: build.mutation({
       query: ({ faqData, id }) => ({
         url: `${FAQ_URL}/${id}`,
-        method: 'PUT',
+        method: 'PATCH',
         data: faqData,
       }),
       onQueryStarted: async ({ faqData, id }, { dispatch, queryFulfilled }) => {

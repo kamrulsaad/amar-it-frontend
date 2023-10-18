@@ -19,7 +19,6 @@ const EditFaq = ({
   const [updateFaq, { isLoading }] = useUpdateFaqMutation()
   const router = useRouter()
   const onSubmit: SubmitHandler<UpdateFaqFormType> = async (data) => {
-    message.loading('udpdating.....')
     try {
       const response = await updateFaq({ data, id }).unwrap()
 
