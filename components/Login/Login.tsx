@@ -49,10 +49,6 @@ const Login = () => {
         <div>
           <Form
             onSubmit={onSubmit}
-            defaultValues={{
-              username: 'hello world',
-              password: '123454',
-            }}
             resolver={loginResolver}
           >
             <div>
