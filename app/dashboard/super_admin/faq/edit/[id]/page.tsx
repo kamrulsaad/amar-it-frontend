@@ -59,8 +59,8 @@ const EditFaq = ({
             <FormInput name="answer" label="Answer" />
           </Col>
         </Row>
-        <Button loading={isLoading} type="primary" htmlType="submit">
-          add
+        <Button loading={isLoading} type='primary' htmlType='submit'>
+          update
         </Button>
       </Form>
     </div>

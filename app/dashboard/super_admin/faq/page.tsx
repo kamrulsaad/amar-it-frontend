@@ -84,8 +84,8 @@ const FAQpage = () => {
       <UMBreadCrumb
         items={[
           {
-            label: 'admin',
-            link: '/admin',
+            label: 'super_admin',
+            link: '/dashboard/super_admin',
           },
         ]}
       />
