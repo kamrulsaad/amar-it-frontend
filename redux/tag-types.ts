@@ -1,6 +1,7 @@
 export enum TagTypes {
-  user = 'user',
-  faq = 'faq',
+  user = "user",
+  faq = "faq",
+  services = "services",
 }
 
-export const tagTypesList = [TagTypes.user, TagTypes.faq]
+export const tagTypesList = [TagTypes.user, TagTypes.faq, TagTypes.services];
