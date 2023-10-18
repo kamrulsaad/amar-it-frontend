@@ -3,16 +3,19 @@ import { UserOutlined } from "@ant-design/icons";
 import { getUserInfo, removeUserInfo } from "@/services/auth.service";
 import { authKey } from "@/constants/storageKey";
 import { useRouter } from "next/navigation";
+import useLogOut from "@/utils/logOut";
 
 const { Header: AntHeader } = Layout;
 
 const Header = () => {
-  const router = useRouter();
+//   const router = useRouter();
 
-  const logOut = () => {
-    removeUserInfo(authKey);
-    router.push("/login");
-  };
+//   const logOut = () => {
+//     removeUserInfo(authKey);
+//     router.push("/login");
+//   };
+
+    const logOut = useLogOut();
 
   const items: MenuProps["items"] = [
     {
