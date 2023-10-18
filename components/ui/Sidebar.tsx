@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { Layout, Menu } from "antd";
 import { sidebarItems } from "@/constants/sidebarItems";
-import { USER_ROLE } from "@/constants/role";
+import Image from "next/image";
 import { getUserInfo } from "@/services/auth.service";
+import Link from "next/link";
 
 const { Sider } = Layout;
 
@@ -37,7 +38,14 @@ const Sidebar = () => {
           margin: "1rem 0",
         }}
       >
-        {collapsed ? "UMS" : "UMS - PHero"}
+        <Link href={`/`}>
+          <Image
+            src={collapsed ? "/favicon.png" : "/dark_logo.png"}
+            alt="logo"
+            width={collapsed ? 40 : 100}
+            height={40}
+          />
+        </Link>
       </div>
       <Menu
         theme="dark"
