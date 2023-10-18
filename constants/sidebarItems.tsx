@@ -186,60 +186,36 @@ export const sidebarItems = (role: string) => {
       icon: <AppstoreOutlined />,
       children: [
         {
-          label: <Link href={`/dashboard/${role}/permission`}>Admin Permissions</Link>,
+          label: (
+            <Link href={`/dashboard/${role}/permission`}>
+              Admin Permissions
+            </Link>
+          ),
           key: `/${role}/department`,
         },
       ],
     },
   ];
 
-  const facultySidebarItems: MenuProps["items"] = [
+  const customerSidebarItems: MenuProps["items"] = [
     ...defaultSidebarItems,
     {
-      label: <Link href={`/dashboard/${role}/courses`}>Courses</Link>,
+      label: <Link href={`/dashboard/${role}/booking`}>Bookings</Link>,
       icon: <TableOutlined />,
-      key: `/${role}/courses`,
-    },
-  ];
-
-  const studentSidebarItems: MenuProps["items"] = [
-    ...defaultSidebarItems,
-    {
-      label: <Link href={`/dashboard/${role}/courses`}>Courses</Link>,
-      icon: <TableOutlined />,
-      key: `/${role}/courses`,
+      key: `/${role}/booking`,
     },
     {
       label: (
-        <Link href={`/dashboard/${role}/courses/schedule`}>
-          Course schedules
-        </Link>
+        <Link href={`/dashboard/${role}/notifications`}>Notifications</Link>
       ),
-      icon: <ScheduleOutlined />,
-      key: `/${role}/courses/schedule`,
-    },
-    {
-      label: <Link href={`/dashboard/${role}/registration`}>Registration</Link>,
-      icon: <ThunderboltOutlined />,
-      key: `/${role}/registration`,
-    },
-    {
-      label: <Link href={`/dashboard/${role}/payment`}>Payment</Link>,
-      icon: <CreditCardOutlined />,
-      key: `/${role}/payment`,
-    },
-    {
-      label: (
-        <Link href={`/dashboard/${role}/academic-report`}>Academic report</Link>
-      ),
-      icon: <FileTextOutlined />,
-      key: `/${role}/academic-report`,
+      icon: <TableOutlined />,
+      key: `/${role}/notifications`,
     },
   ];
 
   if (role === USER_ROLE.SUPER_ADMIN) return superAdminSidebarItems;
   else if (role === USER_ROLE.ADMIN) return adminSidebarItems;
-  else if (role === USER_ROLE.CUSTOMER) return facultySidebarItems;
+  else if (role === USER_ROLE.CUSTOMER) return customerSidebarItems;
   else {
     return defaultSidebarItems;
   }

@@ -10,3 +10,21 @@
   box-sizing: border-box;
   font-family: "Nunito", sans-serif;
 }
+
+.mobileVisible {
+  display: none;
+}
+
+.mobile-hidden {
+  display: block;
+}
+
+@media only screen and (max-width: 767px) {
+  .mobileVisible {
+    display: block;
+  }
+
+  .mobile-hidden {
+    display: none;
+  }
+}

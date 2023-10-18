@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Providers from "@/lib/Providers";
-import Navbar from "./(rootLayout)/_components/Navbar/Navbar";
-import Container from "@/components/Container";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Home | Amar IT",
+  title: "Amar IT",
   description: "The best internet service provider",
 };
 
