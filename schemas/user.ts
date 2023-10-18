@@ -42,7 +42,6 @@ const CustomerSignUpValidation = z.object(
         address: z.string({
           required_error: 'Address is required',
         }),
-        profileImage: z.string().optional(),
       },
       {
         required_error: 'Customer info is required',

@@ -6,7 +6,7 @@ import FormInput from '../Forms/FormInput'
 import UploadImage from '../ui/UploadImage'
 import { useRouter } from 'next/navigation'
 import { SubmitHandler } from 'react-hook-form'
-import { CustomerSignUpFormType } from '@/schemas/user'
+import { CustomerSignUpFormType, customerSignUpResolver } from '@/schemas/user'
 import { useCustomerSignUpMutation } from '@/redux/api/authApi'
 import Image from 'next/image'
 import LoginImage from '@/assets/login-image.svg'
@@ -59,13 +59,14 @@ const CustomerRegistration = () => {
           First Register to your account
         </h1>
         <div>
-          <Form onSubmit={onSubmit}>
+          <Form onSubmit={onSubmit} resolver={customerSignUpResolver}>
             <div>
               <FormInput
                 type='text'
                 size='large'
                 name='user.username'
                 label='Username'
+                required
               />
             </div>
             <div
@@ -78,6 +79,7 @@ const CustomerRegistration = () => {
                 size='large'
                 name='user.password'
                 label='User Password'
+                required
               />
             </div>
             <div
@@ -126,6 +128,7 @@ const CustomerRegistration = () => {
                 size='large'
                 name='customer.email'
                 label='Email Address'
+                required
               />
             </div>
             <div
@@ -138,6 +141,7 @@ const CustomerRegistration = () => {
                 size='large'
                 name='customer.contactNo'
                 label='Contact No'
+                required
               />
             </div>
             <div
@@ -154,10 +158,7 @@ const CustomerRegistration = () => {
                 margin: '15px 0',
               }}
             >
-              <FormTextArea
-                name='customer.address'
-                label='address'
-              />
+              <FormTextArea name='customer.address' label='address' required />
             </div>
             <Button loading={isLoading} htmlType='submit' type='primary'>
               SignUp

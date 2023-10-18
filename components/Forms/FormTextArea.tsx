@@ -7,6 +7,7 @@ type TextAreaProps = {
   value?: string | string[] | undefined;
   placeholder?: string;
   label: string;
+  required?: boolean;
 };
 
 const FormTextArea = ({
@@ -15,11 +16,21 @@ const FormTextArea = ({
   rows,
   value,
   placeholder,
+  required,
 }: TextAreaProps) => {
   const { control } = useFormContext();
 
   return (
     <div>
+      {required ? (
+        <span
+          style={{
+            color: 'red',
+          }}
+        >
+          *
+        </span>
+      ) : null}
       {label ? label : null}
       <Controller
         control={control}
@@ -34,7 +45,7 @@ const FormTextArea = ({
         )}
       />
     </div>
-  );
+  )
 };
 
 export default FormTextArea;
