@@ -28,3 +28,8 @@ export type IHomeBannerContent = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type IPermission = {
+  id: string;
+  title: string;
+}

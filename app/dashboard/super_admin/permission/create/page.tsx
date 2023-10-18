@@ -11,7 +11,7 @@ const CreateDepartmentPage = () => {
 
   const onSubmit = async (data: any) => {
     try {
-      const response = await addDepartment(data);
+    await addDepartment(data);
       message.success("Permission created successfully");
     } catch (err: any) {
       message.error(err.message);
@@ -22,8 +22,8 @@ const CreateDepartmentPage = () => {
     <div>
       <UMBreadCrumb
         items={[
-          { label: `${base}`, link: `${base}` },
-          { label: "permissions", link: `${base}/permission` },
+          { label: `${base}`, link: `/${base}` },
+          { label: "permissions", link: `/${base}/permission` },
         ]}
       />
       <h1>Create Permission</h1>

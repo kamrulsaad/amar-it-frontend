@@ -13,7 +13,10 @@ import { useState } from "react";
 import ActionBar from "@/components/ui/ActionBar";
 import { useDebounced } from "@/redux/hooks";
 import dayjs from "dayjs";
-import { useDeletePermissionMutation, useGetPermissionsQuery } from "@/redux/api/permissionApi";
+import {
+  useDeletePermissionMutation,
+  useGetPermissionsQuery,
+} from "@/redux/api/permissionApi";
 
 const PermissionsPage = () => {
   const query: Record<string, any> = {};
@@ -29,7 +32,6 @@ const PermissionsPage = () => {
   query["page"] = page;
   query["sortBy"] = sortBy;
   query["sortOrder"] = sortOrder;
-  // query["searchTerm"] = searchTerm;
 
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
@@ -56,6 +58,7 @@ const PermissionsPage = () => {
     {
       title: "Title",
       dataIndex: "title",
+      sorter: true,
     },
     {
       title: "Action",
@@ -86,7 +89,6 @@ const PermissionsPage = () => {
   ];
 
   const onPaginationChange = (page: number, pageSize: number) => {
-    console.log("Page:", page, "PageSize:", pageSize);
     setPage(page);
     setSize(pageSize);
   };
@@ -145,7 +147,7 @@ const PermissionsPage = () => {
       <UMTable
         loading={isLoading}
         columns={columns}
-        dataSource={data}
+        dataSource={data?.permissions}
         pageSize={size}
         totalPages={meta?.total}
         showSizeChanger={true}
