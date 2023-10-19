@@ -2,24 +2,24 @@ import { IAdmin, IMeta } from "@/types";
 import { baseApi } from "./baseApi";
 import { TagTypes } from "../tag-types";
 
-const ADMIN_URL = "/home-banner";
+const HOME_BANNER = "/home-banner";
 
 export const adminApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     createHomeBanner: build.mutation({
       query: (data) => ({
-        url: ADMIN_URL,
+        url: HOME_BANNER,
         method: "POST",
         data,
         contentType: "multipart/form-data",
       }),
-      invalidatesTags: [TagTypes.admin],
+      invalidatesTags: [TagTypes.bannerContent],
     }),
 
     admins: build.query({
       query: (arg: Record<string, any>) => {
         return {
-          url: ADMIN_URL,
+          url: HOME_BANNER,
           method: "GET",
           params: arg,
         };
@@ -34,14 +34,14 @@ export const adminApi = baseApi.injectEndpoints({
     }),
     admin: build.query({
       query: (id: string | string[] | undefined) => ({
-        url: `${ADMIN_URL}/${id}`,
+        url: `${HOME_BANNER}/${id}`,
         method: "GET",
       }),
       providesTags: [TagTypes.admin],
     }),
     updateAdmin: build.mutation({
       query: (data) => ({
-        url: `${ADMIN_URL}/${data.id}`,
+        url: `${HOME_BANNER}/${data.id}`,
         method: "PATCH",
         data: data.body,
         contentType: "multipart/form-data",
@@ -59,7 +59,7 @@ export const adminApi = baseApi.injectEndpoints({
     }),
     deleteAdmin: build.mutation({
       query: (id) => ({
-        url: `${ADMIN_URL}/${id}`,
+        url: `${HOME_BANNER}/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: [TagTypes.admin],
