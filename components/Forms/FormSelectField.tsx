@@ -1,33 +1,35 @@
-"use-client";
+'use client'
 
-import { Select } from "antd";
-import { Controller, useFormContext } from "react-hook-form";
+import { Select } from 'antd'
+import { useFormContext, Controller } from 'react-hook-form'
 
 export type SelectOptions = {
-  value: string;
-  label: string;
-};
+  label: string
+  value: string
+}
 
 type SelectFieldProps = {
-  options: SelectOptions[];
-  name: string;
-  size?: "large" | "small";
-  value?: string | string[] | undefined;
-  label: string;
-  defaultValue?: SelectOptions;
-  placeholder?: string;
-};
+  options: SelectOptions[]
+  name: string
+  size?: 'large' | 'small'
+  value?: string | string[] | undefined
+  placeholder?: string
+  label?: string
+  defaultValue?: SelectOptions
+  handleChange?: (el: string) => void
+}
 
 const FormSelectField = ({
   name,
-  size,
+  size = 'large',
   value,
-  label,
+  placeholder = 'select',
   options,
+  label,
   defaultValue,
-  placeholder,
+  handleChange,
 }: SelectFieldProps) => {
-  const { control } = useFormContext();
+  const { control } = useFormContext()
 
   return (
     <>
@@ -37,19 +39,17 @@ const FormSelectField = ({
         name={name}
         render={({ field: { value, onChange } }) => (
           <Select
-            style={{ width: "100%" }}
-            onChange={onChange}
+            onChange={handleChange ? handleChange : onChange}
             size={size}
             options={options}
             value={value}
-            loading={!options}
+            style={{ width: '100%' }}
             placeholder={placeholder}
-            defaultValue={defaultValue}
           />
         )}
       />
     </>
-  );
-};
+  )
+}
 
-export default FormSelectField;
+export default FormSelectField
