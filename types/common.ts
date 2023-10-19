@@ -72,3 +72,12 @@ export type IPackage = {
   updatedAt: string;
   service: IService;
 }
+export type IBlog = {
+    id: string;
+    title: string;
+    content: string;
+    image: string;
+    blogCategoryId: string;
+    createdAt: Date;
+    updatedAt: Date;
+}

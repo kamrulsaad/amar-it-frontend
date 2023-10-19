@@ -1,5 +1,6 @@
 import { TagTypes } from '@/redux/tag-types'
 import { baseApi } from './baseApi'
+import { IBlog, IMeta } from '@/types'
 
 const BLOG_URL = '/blogs'
 
@@ -15,10 +16,17 @@ export const blogApi = baseApi.injectEndpoints({
       invalidatesTags: [TagTypes.blog],
     }),
     getBlogs: build.query({
-      query: () => ({
+      query: (arg: Record<string, any>) => ({
         url: `${BLOG_URL}`,
         method: 'GET',
+        params: arg,
       }),
+      transformResponse: (response: IBlog[], meta: IMeta) => {
+        return {
+          blogs: response,
+          meta,
+        }
+      },
       providesTags: [TagTypes.blog],
     }),
     getBlog: build.query({
@@ -28,28 +36,14 @@ export const blogApi = baseApi.injectEndpoints({
       }),
       providesTags: [TagTypes.blog],
     }),
+   
     updateBlog: build.mutation({
-      query: ({ id, ...blog }) => ({
-        url: `${BLOG_URL}/${id}`,
+      query: (data) => ({
+        url: `${BLOG_URL}/${data.id}`,
         method: 'PATCH',
-        data: blog,
+        data: data.body,
+        contentType: 'multipart/form-data',
       }),
-      onQueryStarted: async ({ blog, id }, { dispatch, queryFulfilled }) => {
-        dispatch(
-          blogApi.util.updateQueryData('getBlog', id, (draft) => {
-            Object.assign(draft, blog)
-          })
-        )
-        try {
-          await queryFulfilled
-        } catch {
-          dispatch(
-            blogApi.util.updateQueryData('getBlog', id, (draft) => {
-              Object.assign(draft, { id })
-            })
-          )
-        }
-      },
       invalidatesTags: [TagTypes.blog],
     }),
     deleteBlog: build.mutation({

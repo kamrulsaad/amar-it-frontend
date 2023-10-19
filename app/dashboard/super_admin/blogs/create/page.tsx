@@ -39,7 +39,7 @@ const CreateBlogCategory = () => {
     try {
       const res = await createBlog(formData).unwrap()
       if (!!res) {
-        router.push('/dashboard/super_admin/blog-category')
+        router.push('/dashboard/super_admin/blogs')
         message.success('Blog Created Successfully')
       }
     } catch (err: any) {
@@ -55,7 +55,7 @@ const CreateBlogCategory = () => {
       <UMBreadCrumb
         items={[
           { label: `${base}`, link: `/dashboard/${base}` },
-          { label: 'Blog-category', link: `/dashboard/${base}/blog-category` },
+          { label: 'Blog', link: `/${base}/blogs` },
         ]}
       />
       <h1>Create Blog</h1>
