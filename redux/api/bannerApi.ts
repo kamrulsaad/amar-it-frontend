@@ -47,15 +47,6 @@ export const adminApi = baseApi.injectEndpoints({
         contentType: "multipart/form-data",
       }),
       invalidatesTags: [TagTypes.admin],
-      /**
-       * query: (data) => ({
-        url: "/users/create-admin",
-        method: "POST",
-        data,
-        contentType: "multipart/form-data",
-      }),
-      invalidatesTags: [TagTypes.admin],
-       */
     }),
     deleteAdmin: build.mutation({
       query: (id) => ({

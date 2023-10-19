@@ -49,3 +49,25 @@ export type IAdmin = {
   updatedAt: string;
   permission: IPermission;
 };
+
+export type IService = {
+  id: string;
+  title: string;
+  description: string;
+  features: string[];
+  charge: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type IPackage = {
+  id: string;
+  title: string;
+  bandwidth: string;
+  charge: number;
+  features: string[];
+  serviceId: string;
+  createdAt: string;
+  updatedAt: string;
+  service: IService;
+}
