@@ -9,13 +9,14 @@ import UploadImage from "@/components/ui/UploadImage";
 import { useAddAdminWithFormDataMutation } from "@/redux/api/adminApi";
 import { useGetPermissionsQuery } from "@/redux/api/permissionApi";
 import { IPermission } from "@/types";
-
+import { useRouter } from 'next/navigation'
 import { Button, Col, Row, message } from "antd";
 
 const CreateAdminPage = () => {
   const { data } = useGetPermissionsQuery({ limit: 100, page: 1 });
   const [addAdminWithFormData, { isLoading }] =
     useAddAdminWithFormDataMutation();
+   const router = useRouter()
   //@ts-ignore
   const departments: IPermission[] = data?.permissions;
 
@@ -38,8 +39,12 @@ const CreateAdminPage = () => {
     formData.append("data", data);
 
     try {
-      await addAdminWithFormData(formData);
-      message.success("Admin created successfully!");
+      const res = await addAdminWithFormData(formData).unwrap();
+      if (!!res) {
+        message.success("Admin created successfully!");
+        router.push('/dashboard/super_admin/manage-admin')
+      }
+
     } catch (err: any) {
       for (const error of err.data.errorMessages){
         message.error(error.message)

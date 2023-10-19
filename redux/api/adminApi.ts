@@ -1,17 +1,17 @@
-import { IAdmin, IMeta } from "@/types";
-import { baseApi } from "./baseApi";
-import { TagTypes } from "../tag-types";
+import { IAdmin, IMeta } from '@/types'
+import { baseApi } from './baseApi'
+import { TagTypes } from '../tag-types'
 
-const ADMIN_URL = "/admins";
+const ADMIN_URL = '/admins'
 
 export const adminApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     addAdminWithFormData: build.mutation({
       query: (data) => ({
-        url: "/users/create-admin",
-        method: "POST",
+        url: '/users/create-admin',
+        method: 'POST',
         data,
-        contentType: "multipart/form-data",
+        contentType: 'multipart/form-data',
       }),
       invalidatesTags: [TagTypes.admin],
     }),
@@ -20,53 +20,43 @@ export const adminApi = baseApi.injectEndpoints({
       query: (arg: Record<string, any>) => {
         return {
           url: ADMIN_URL,
-          method: "GET",
+          method: 'GET',
           params: arg,
-        };
+        }
       },
       transformResponse: (response: IAdmin[], meta: IMeta) => {
         return {
           admins: response,
           meta,
-        };
+        }
       },
       providesTags: [TagTypes.admin],
     }),
     admin: build.query({
       query: (id: string | string[] | undefined) => ({
         url: `${ADMIN_URL}/${id}`,
-        method: "GET",
+        method: 'GET',
       }),
       providesTags: [TagTypes.admin],
-    }),
-    updateAdmin: build.mutation({
-      query: (data) => 
-        ( {
-          url: `${ADMIN_URL}/${data.id}`,
-          method: "PATCH",
-          data: data.body,
-          contentType: "multipart/form-data",
-        }),
-      invalidatesTags: [TagTypes.admin],
-      /**
-       * query: (data) => ({
-        url: "/users/create-admin",
-        method: "POST",
-        data,
-        contentType: "multipart/form-data",
-      }),
-      invalidatesTags: [TagTypes.admin],
-       */
     }),
     deleteAdmin: build.mutation({
       query: (id) => ({
         url: `${ADMIN_URL}/${id}`,
-        method: "DELETE",
+        method: 'DELETE',
+      }),
+      invalidatesTags: [TagTypes.admin],
+    }),
+    updateAdmin: build.mutation({
+      query: (data) => ({
+        url: `${ADMIN_URL}/${data.id}`,
+        method: 'PATCH',
+        data: data.body,
+        contentType: 'multipart/form-data',
       }),
       invalidatesTags: [TagTypes.admin],
     }),
   }),
-});
+})
 
 export const {
   useAdminsQuery,
@@ -74,4 +64,4 @@ export const {
   useAddAdminWithFormDataMutation,
   useUpdateAdminMutation,
   useDeleteAdminMutation,
-} = adminApi;
+} = adminApi
