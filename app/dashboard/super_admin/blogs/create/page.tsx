@@ -16,8 +16,6 @@ const CreateBlogCategory = () => {
 
   const { data: blogCategories } = useGetBlogCategoriesQuery(undefined);
 
-  console.log(blogCategories?.data);
-
   const options = blogCategories?.data?.map((item: any) => ({
     label: item.title,
     value: item.id,

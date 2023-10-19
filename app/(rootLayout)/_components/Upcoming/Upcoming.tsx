@@ -1,10 +1,10 @@
 import { Button, Col, Row } from "antd";
-import ServiceCard from "./ServiceCard";
 import { IService } from "@/types";
+import ServiceCard from "../Services/ServiceCard";
 
 async function getData() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/services?status=active`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/services?status=upcoming`,
     {
       cache: "no-cache",
     }
@@ -18,19 +18,22 @@ async function getData() {
   }
 }
 
-const Service = async () => {
+const UpcomingService = async () => {
   const data = await getData();
 
   const slicedData = data.slice(0, 4);
 
   return (
-    <div>
+    <div style={{
+        marginTop: "20px",
+        marginBottom: "20px",
+    }}>
       <h2
         style={{
           textAlign: "center",
         }}
       >
-        Our Services
+        Upcoming Services
       </h2>
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
         <Col className="gutter-row" span={6}>
@@ -54,4 +57,4 @@ const Service = async () => {
   );
 };
 
-export default Service;
+export default UpcomingService;

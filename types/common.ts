@@ -56,6 +56,7 @@ export type IService = {
   description: string;
   features: string[];
   charge: number;
+  status: string;
   createdAt: string;
   updatedAt: string;
 };
