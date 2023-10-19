@@ -22,7 +22,7 @@ interface EditAdminProps {
 const EditAdmin = ({ params }: EditAdminProps) => {
   const { id } = params
 
-  const { data: admin, refetch } = useAdminQuery(id)
+  const { data: admin } = useAdminQuery(id)
   const router = useRouter()
   const defaultValues = {
     admin: {
@@ -67,7 +67,7 @@ const EditAdmin = ({ params }: EditAdminProps) => {
       const res = await updateAdmin({ id, body: formData }).unwrap()
       if (!!res) {
         message.success('Admin updated successfully!')
-        router.push('/dashboard/super_admin/manage-admin')
+        // router.push('/dashboard/super_admin/manage-admin')
       }
     } catch (err: any) {
       for (const error of err.data.errorMessages) {
