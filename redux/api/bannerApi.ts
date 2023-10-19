@@ -1,3 +1,4 @@
+
 import { baseApi } from './baseApi'
 import { TagTypes } from '../tag-types'
 
@@ -29,28 +30,12 @@ export const homeBannerApi = baseApi.injectEndpoints({
       providesTags: [TagTypes.bannerContent],
     }),
     updateHomeBanner: build.mutation({
-      query: ({ id, ...data }) => ({
-        url: `${HOME_BANNER}/${id}`,
+      query: (data) => ({
+        url: `${HOME_BANNER}/${data.id}`,
         method: 'PATCH',
-        data,
+        data: data.body,
         contentType: 'multipart/form-data',
       }),
-      onQueryStarted: async ({ data, id }, { dispatch, queryFulfilled }) => {
-        dispatch(
-          homeBannerApi.util.updateQueryData('getHomeBanner', id, (draft) => {
-            Object.assign(draft, data)
-          })
-        )
-        try {
-          await queryFulfilled
-        } catch {
-          dispatch(
-            homeBannerApi.util.updateQueryData('getHomeBanner', id, (draft) => {
-              Object.assign(draft, { id })
-            })
-          )
-        }
-      },
       invalidatesTags: [TagTypes.bannerContent],
     }),
     deleteHomeBanner: build.mutation({
