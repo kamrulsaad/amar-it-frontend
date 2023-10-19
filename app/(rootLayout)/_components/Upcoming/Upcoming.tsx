@@ -24,10 +24,12 @@ const UpcomingService = async () => {
   const slicedData = data.slice(0, 4);
 
   return (
-    <div style={{
+    <div
+      style={{
         marginTop: "20px",
         marginBottom: "20px",
-    }}>
+      }}
+    >
       <h2
         style={{
           textAlign: "center",
@@ -36,11 +38,11 @@ const UpcomingService = async () => {
         Upcoming Services
       </h2>
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-        <Col className="gutter-row" span={6}>
-          {slicedData.map((service: IService) => (
-            <ServiceCard key={service.id} service={service} />
-          ))}
-        </Col>
+        {slicedData.map((service: IService) => (
+          <Col key={service.id} className="gutter-row" span={6}>
+            <ServiceCard service={service} />
+          </Col>
+        ))}
       </Row>
       <Button
         style={{

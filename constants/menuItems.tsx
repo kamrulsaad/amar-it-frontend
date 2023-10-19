@@ -5,6 +5,7 @@ import {
   UserOutlined,
   LogoutOutlined,
   PicLeftOutlined,
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
 
 const user = getUserInfo() as any;
@@ -40,19 +41,24 @@ const loggedInItems: MenuProps["items"] = [
     key: "Dashboard",
     children: [
       {
+        label: <Link href="/cart">View Cart</Link>,
+        icon: <ShoppingCartOutlined />,
+        key: "setting:1",
+      },
+      {
         label: <Link href="/dashboard">Dashboard</Link>,
         icon: <PicLeftOutlined />,
         key: "setting:2",
       },
       {
-        label: <Link href="/logout">Log out</Link>,
-        icon: <LogoutOutlined />,
-        key: "setting:1",
-      },
-      {
         label: <Link href={`/${user.role}/profile`}>Profile</Link>,
         key: "setting:3",
         icon: <UserOutlined />,
+      },
+      {
+        label: <Link href="/logout">Log out</Link>,
+        icon: <LogoutOutlined />,
+        key: "setting:1",
       },
     ],
   },
