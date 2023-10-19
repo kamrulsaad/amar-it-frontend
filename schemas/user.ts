@@ -54,9 +54,23 @@ const CustomerSignUpValidation = z.object(
 )
 
 
+const resetPassword = z.object({
+    oldPassword: z.string({
+      required_error: 'Old Password is required',
+    }),
+    newPassword: z.string({
+      required_error: 'New Password is required',
+    }),
+})
+
+
 export type LoginFormType = z.infer<typeof LoginValidation>
 export const loginResolver = zodResolver(LoginValidation)
 
 
 export type CustomerSignUpFormType = z.infer<typeof CustomerSignUpValidation>
 export const customerSignUpResolver = zodResolver(CustomerSignUpValidation)
+
+export type ResetPasswordFormType = z.infer<typeof resetPassword>
+export const resetPasswordResolver = zodResolver(resetPassword)
+
