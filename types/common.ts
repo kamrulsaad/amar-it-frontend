@@ -50,6 +50,20 @@ export type IAdmin = {
   permission: IPermission;
 };
 
+export type ICustomer = {
+  id: string;
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  email: string;
+  contactNo: string;
+  address: string;
+  profileImage: string;
+  username: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type IService = {
   id: string;
   title: string;

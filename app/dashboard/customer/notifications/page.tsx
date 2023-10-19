@@ -1,9 +1,5 @@
-
-
 const NotificationPage = () => {
-  return (
-    <div>NotificationPage</div>
-  )
-}
+  return <div>Notifications Feature coming soon</div>;
+};
 
-export default NotificationPage
+export default NotificationPage;

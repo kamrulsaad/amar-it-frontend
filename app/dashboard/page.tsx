@@ -1,16 +1,12 @@
-import { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Dashboard - Amar IT",
-  description: "Login to Amar IT",
-};
+import { getUserInfo } from "@/services/auth.service";
+import { useRouter } from "next/navigation";
 
 const Dashboard = () => {
-  return (
-    <div>
-      Dashboard
-    </div>
-  )
-}
+  const router = useRouter();
+  const { role } = getUserInfo() as any;
+  return router.push("/dashboard/" + role);
+};
 
-export default Dashboard
+export default Dashboard;
