@@ -19,7 +19,7 @@ const Header = () => {
     },
   ];
 
-  const { role } = getUserInfo() as any;
+  const { username } = getUserInfo() as any;
 
   return (
     <AntHeader
@@ -39,7 +39,7 @@ const Header = () => {
             margin: "0px 5px",
           }}
         >
-          {role}
+          {username}
         </p>
         <Dropdown menu={{ items }}>
           <a>

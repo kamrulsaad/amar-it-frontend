@@ -71,13 +71,29 @@ export type IPackage = {
   createdAt: string;
   updatedAt: string;
   service: IService;
-}
+};
 export type IBlog = {
+  id: string;
+  title: string;
+  content: string;
+  image: string;
+  blogCategoryId: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type IBooking = {
+  id: string;
+  startTime: string;
+  endTime: string;
+  date: string;
+  customerId: string;
+  customer: {
     id: string;
-    title: string;
-    content: string;
-    image: string;
-    blogCategoryId: string;
-    createdAt: Date;
-    updatedAt: Date;
-}
+    username: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+  serviceId: string;
+  service: IService;
+};

@@ -1,21 +1,22 @@
 "use client";
 
-import cartSlice from "@/redux/features/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
-import { isLoggedIn } from "@/services/auth.service";
+import { getUserInfo } from "@/services/auth.service";
 import { IService } from "@/types";
 import { Badge, Button, Card, Divider, Space, message } from "antd";
 import { useRouter } from "next/navigation";
 import { addToCart } from "@/redux/features/cartSlice";
 
 const ServiceCard = ({ service }: { service: IService }) => {
-  const user = isLoggedIn();
+  const user = getUserInfo() as any;
   const router = useRouter();
 
   const dispatch = useAppDispatch();
 
   const handleAddToCart = () => {
-    if (!user) return router.push("/login");
+    if (!user.username) return router.push("/login");
+    if (user.role !== "customer")
+      return message.error("Only customers can add to cart");
 
     dispatch(addToCart(service));
     message.success("Added to cart");

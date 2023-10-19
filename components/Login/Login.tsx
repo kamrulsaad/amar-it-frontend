@@ -6,12 +6,11 @@ import Image from "next/image";
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import { useUserLoginMutation } from "@/redux/api/authApi";
-import { getUserInfo, storeUserInfo } from "@/services/auth.service";
+import { storeUserInfo } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 import { SubmitHandler } from "react-hook-form";
 import { LoginFormType, loginResolver } from "@/schemas/user";
 import Link from "next/link";
-import { decodedToken } from "@/utils/jwt";
 
 const Login = () => {
   const [userLogin, { isLoading }] = useUserLoginMutation();
@@ -22,8 +21,8 @@ const Login = () => {
     try {
       const response = await userLogin({ ...data }).unwrap();
       if (response?.accessToken) {
-        const user = decodedToken(response?.accessToken) as any;
-        router.push(`/dashboard/${user?.role}`);
+        // router.push(`/dashboard/${user?.role}`);
+        router.back();
         message.success("Login Successful");
       }
       storeUserInfo({ accessToken: response?.accessToken });

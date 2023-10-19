@@ -1,4 +1,8 @@
-import { getUserInfo, isLoggedIn } from "@/services/auth.service";
+import {
+  getUserInfo,
+  isLoggedIn,
+  removeUserInfo,
+} from "@/services/auth.service";
 import { Avatar, MenuProps } from "antd";
 import Link from "next/link";
 import {
@@ -7,10 +11,16 @@ import {
   PicLeftOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
+import { authKey } from "./storageKey";
 
 const user = getUserInfo() as any;
 
 const userLoggedIn = isLoggedIn();
+
+const handleLogout = () => {
+  removeUserInfo(authKey);
+  window.location.reload();
+};
 
 const items: MenuProps["items"] = [
   {
@@ -37,7 +47,16 @@ const items: MenuProps["items"] = [
 
 const loggedInItems: MenuProps["items"] = [
   {
-    label: <Avatar style={{ backgroundColor: '#5800ff', color: '#fff', alignItems: "center" }} icon={<UserOutlined />}/>,
+    label: (
+      <Avatar
+        style={{
+          backgroundColor: "#5800ff",
+          color: "#fff",
+          alignItems: "center",
+        }}
+        icon={<UserOutlined />}
+      />
+    ),
     key: "Dashboard",
     children: [
       {
@@ -56,9 +75,9 @@ const loggedInItems: MenuProps["items"] = [
         icon: <UserOutlined />,
       },
       {
-        label: <Link href="/logout">Log out</Link>,
+        label: <Link href={'#'} onClick={handleLogout}>Log out</Link>,
         icon: <LogoutOutlined />,
-        key: "setting:1",
+        key: "setting:4",
       },
     ],
   },
