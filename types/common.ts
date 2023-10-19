@@ -32,4 +32,20 @@ export type IHomeBannerContent = {
 export type IPermission = {
   id: string;
   title: string;
-}
+};
+
+export type IAdmin = {
+  id: string;
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  email: string;
+  contactNo: string;
+  address: string;
+  profileImage: string;
+  username: string;
+  permissionId: string;
+  createdAt: string;
+  updatedAt: string;
+  permission: IPermission;
+};

@@ -9,6 +9,7 @@ interface IModal {
   handleOk?: () => void;
   showCancelButton?: boolean;
   showOkButton?: boolean;
+  loading?: boolean;
 }
 
 const UMModal = ({
@@ -19,9 +20,11 @@ const UMModal = ({
   handleOk,
   showCancelButton = true,
   showOkButton = true,
+  loading = false,
 }: IModal) => {
   return (
     <Modal
+      confirmLoading={loading}
       title={title}
       open={isOpen}
       onOk={handleOk}
