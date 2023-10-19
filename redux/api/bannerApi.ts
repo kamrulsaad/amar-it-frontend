@@ -2,13 +2,13 @@ import { IAdmin, IMeta } from "@/types";
 import { baseApi } from "./baseApi";
 import { TagTypes } from "../tag-types";
 
-const ADMIN_URL = "/admins";
+const ADMIN_URL = "/home-banner";
 
 export const adminApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    addAdminWithFormData: build.mutation({
+    createHomeBanner: build.mutation({
       query: (data) => ({
-        url: "/users/create-admin",
+        url: ADMIN_URL,
         method: "POST",
         data,
         contentType: "multipart/form-data",
@@ -40,13 +40,12 @@ export const adminApi = baseApi.injectEndpoints({
       providesTags: [TagTypes.admin],
     }),
     updateAdmin: build.mutation({
-      query: (data) => 
-        ( {
-          url: `${ADMIN_URL}/${data.id}`,
-          method: "PATCH",
-          data: data.body,
-          contentType: "multipart/form-data",
-        }),
+      query: (data) => ({
+        url: `${ADMIN_URL}/${data.id}`,
+        method: "PATCH",
+        data: data.body,
+        contentType: "multipart/form-data",
+      }),
       invalidatesTags: [TagTypes.admin],
       /**
        * query: (data) => ({
@@ -71,7 +70,7 @@ export const adminApi = baseApi.injectEndpoints({
 export const {
   useAdminsQuery,
   useAdminQuery,
-  useAddAdminWithFormDataMutation,
+  useCreateHomeBannerMutation,
   useUpdateAdminMutation,
   useDeleteAdminMutation,
 } = adminApi;
