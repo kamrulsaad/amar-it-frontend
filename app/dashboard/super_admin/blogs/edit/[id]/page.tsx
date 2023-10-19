@@ -5,7 +5,6 @@ import UMBreadCrumb from '@/components/ui/UMBreadCrumb'
 import { useRouter } from 'next/navigation'
 import { Button, Col, Row, message } from 'antd'
 import {
-  UpdateBlogCategoryFormType,
   updateBlogCategoryResolver,
 } from '@/schemas/blogCategory'
 import { useGetBlogQuery, useUpdateBlogMutation } from '@/redux/api/blogApi'
