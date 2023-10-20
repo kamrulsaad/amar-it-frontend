@@ -11,11 +11,16 @@ import {
   useDeleteServiceMutation,
   useGetServicesQuery,
 } from "@/redux/api/servicesApi";
+import { getUserInfo } from "@/services/auth.service";
 
 const ServicesPage = () => {
   const [deleteFaq] = useDeleteServiceMutation();
-  const { data, isLoading } = useGetServicesQuery(undefined);
-  const faqData = data;
+  const { username } = getUserInfo() as any;
+  const { data, isLoading } = useGetServicesQuery({
+    "customer.username": username,
+  });
+
+  console.log(data)
 
   const deleteHandler = async (id: string) => {
     try {
@@ -102,7 +107,7 @@ const ServicesPage = () => {
         ]}
       />
 
-      <ActionBar title="Services List">
+      <ActionBar title="My Booking List">
         <div>
           <Link href="/dashboard/super_admin/services/create">
             <Button type="primary">Create</Button>
@@ -113,7 +118,7 @@ const ServicesPage = () => {
       <UMTable
         loading={isLoading}
         columns={columns}
-        dataSource={faqData}
+        dataSource={[]}
         showSizeChanger={true}
         showPagination={true}
       />

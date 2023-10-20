@@ -29,7 +29,7 @@ const StatisticSection = () => (
           style={{
             textAlign: "center",
           }}
-          title="Account Balance (CNY)"
+          title="Service Uptime (Days)"
           value={112893}
           precision={2}
         />
@@ -39,8 +39,8 @@ const StatisticSection = () => (
           style={{
             textAlign: "center",
           }}
-          title="Account Balance (CNY)"
-          value={112893}
+          title="Total Revenue (BDT)"
+          value={1122393}
           precision={2}
         />
       </Col>
@@ -49,7 +49,7 @@ const StatisticSection = () => (
           style={{
             textAlign: "center",
           }}
-          title="Account Balance (CNY)"
+          title="Happy Customers"
           value={112893}
           precision={2}
         />
