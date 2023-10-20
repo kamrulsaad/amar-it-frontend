@@ -1,12 +1,9 @@
 "use client";
 
 import { getUserInfo } from "@/services/auth.service";
-import { Avatar, Button } from "antd";
-import { EditOutlined, UserOutlined } from "@ant-design/icons";
-import Image from "next/image";
 import { useAdminsQuery } from "@/redux/api/adminApi";
 
-const SAdminProfilePage = () => {
+const AdminProfilePage = () => {
   const { username } = getUserInfo() as any;
 
   const { data } = useAdminsQuery({
@@ -15,16 +12,17 @@ const SAdminProfilePage = () => {
     username: username,
   });
 
+  console.log(data)
+
   const admin = data?.admins[0];
 
   return (
     <div>
-      <h1 className="mb-2">Super Admin Profile</h1>
+      <h1 className="mb-2">Admin Profile</h1>
       <div className="space-y-2 my-2">
         <p>
           Name:
-          {admin?.firstName}{" "}
-          {admin?.middleName && admin?.middleName + " "}{" "}
+          {admin?.firstName} {admin?.middleName && admin?.middleName + " "}{" "}
           {admin?.lastName}
         </p>
         <p>Username: {admin?.username}</p>
@@ -32,11 +30,8 @@ const SAdminProfilePage = () => {
         <p>Email: {admin?.email}</p>
         <p>Address: {admin?.address}</p>
       </div>
-      <Button type="primary" size="large">
-        <EditOutlined /> Edit Profile
-      </Button>
     </div>
   );
 };
 
-export default SAdminProfilePage;
+export default AdminProfilePage;

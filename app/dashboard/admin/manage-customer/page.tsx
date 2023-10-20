@@ -47,8 +47,6 @@ const CustomerPage = () => {
     query["searchTerm"] = debouncedSearchTerm;
   }
 
-  console.log(query)
-
   const { data, isLoading } = useCustomersQuery({ ...query });
 
   const admins = data?.customers;
@@ -94,7 +92,7 @@ const CustomerPage = () => {
         return (
           <>
             <Link href={`/super_admin/details/${data}`}>
-              <Button onClick={() => console.log(data)} type="primary">
+              <Button type="primary">
                 <EyeOutlined />
               </Button>
             </Link>

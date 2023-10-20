@@ -27,7 +27,6 @@ const CreateCustomerPage = () => {
 
       // @ts-ignore
       if (res.error) return message.error(res.error.data.message);
-
       message.success("Customer created successfully!");
     } catch (err: any) {
       for (const error of err.data.errorMessages) {

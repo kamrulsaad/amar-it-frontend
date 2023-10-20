@@ -19,7 +19,7 @@ const BlogCategoryPage = () => {
     try {
       const res = await deleteBlogCategory(id)
       if (!!res) {
-        message.success('Faq Deleted Successfully')
+        message.success('Blog Category Deleted Successfully')
       }
     } catch (err: any) {
       message.error(err.message)

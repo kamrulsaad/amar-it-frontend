@@ -4,7 +4,9 @@ import FormInput from '@/components/Forms/FormInput'
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb'
 import { useRouter } from 'next/navigation'
 import { Button, Col, Row, message } from 'antd'
-import { updateBlogCategoryResolver } from '@/schemas/blogCategory'
+import {
+  updateBlogCategoryResolver,
+} from '@/schemas/blogCategory'
 import { useGetBlogQuery, useUpdateBlogMutation } from '@/redux/api/blogApi'
 import FormTextArea from '@/components/Forms/FormTextArea'
 import FormSelectField, {

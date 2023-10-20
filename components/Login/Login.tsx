@@ -6,7 +6,7 @@ import Image from "next/image";
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import { useUserLoginMutation } from "@/redux/api/authApi";
-import { storeUserInfo } from "@/services/auth.service";
+import { getUserInfo, storeUserInfo } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 import { SubmitHandler } from "react-hook-form";
 import { LoginFormType, loginResolver } from "@/schemas/user";
@@ -17,12 +17,13 @@ const Login = () => {
 
   const router = useRouter();
 
+  const user = getUserInfo() as any;
+
   const onSubmit: SubmitHandler<LoginFormType> = async (data) => {
     try {
       const response = await userLogin({ ...data }).unwrap();
       if (response?.accessToken) {
-        // router.push(`/dashboard/${user?.role}`);
-        router.back();
+        router.push(`/dashboard/${user?.role}`);
         message.success("Login Successful");
       }
       storeUserInfo({ accessToken: response?.accessToken });

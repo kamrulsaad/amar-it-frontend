@@ -9,10 +9,9 @@ import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import UMTable from "@/components/ui/UMTable";
 import { Button, Input, message } from "antd";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ActionBar from "@/components/ui/ActionBar";
 import { useDebounced } from "@/redux/hooks";
-import dayjs from "dayjs";
 import {
   useDeletePermissionMutation,
   useGetPermissionsQuery,
@@ -26,7 +25,12 @@ const PermissionsPage = () => {
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [deleteDepartment] = useDeletePermissionMutation();
+  const [deleteDepartment, { isLoading: delLoading }] =
+    useDeletePermissionMutation();
+
+  useEffect(() => {
+    if (delLoading) message.loading("Deleting...");
+  }, [delLoading]);
 
   query["limit"] = size;
   query["page"] = page;
@@ -58,7 +62,6 @@ const PermissionsPage = () => {
     {
       title: "Title",
       dataIndex: "title",
-      sorter: true,
     },
     {
       title: "Action",

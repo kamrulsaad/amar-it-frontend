@@ -6,12 +6,11 @@ const ADMIN_URL = "/admins";
 
 export const adminApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    addAdminWithFormData: build.mutation({
-      query: (data) => ({
+    createAdmin: build.mutation({
+      query: (adminData) => ({
         url: "/users/create-admin",
         method: "POST",
-        data,
-        contentType: "multipart/form-data",
+        data: { ...adminData },
       }),
       invalidatesTags: [TagTypes.admin],
     }),
@@ -48,12 +47,10 @@ export const adminApi = baseApi.injectEndpoints({
     }),
     updateAdmin: build.mutation({
       query: (data) => {
-        console.log(data.body.get("data"));
         return {
           url: `${ADMIN_URL}/${data.id}`,
           method: "PATCH",
           data: data.body,
-          contentType: "multipart/form-data",
         };
       },
       invalidatesTags: [TagTypes.admin],
@@ -64,7 +61,7 @@ export const adminApi = baseApi.injectEndpoints({
 export const {
   useAdminsQuery,
   useAdminQuery,
-  useAddAdminWithFormDataMutation,
+  useCreateAdminMutation,
   useUpdateAdminMutation,
   useDeleteAdminMutation,
 } = adminApi;

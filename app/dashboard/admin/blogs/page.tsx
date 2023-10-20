@@ -10,6 +10,7 @@ import { useDeleteBlogMutation, useGetBlogsQuery } from '@/redux/api/blogApi'
 import { useState } from 'react'
 import { useDebounced } from '@/redux/hooks'
 const BlogPage = () => {
+
   const query: Record<string, any> = {}
 
   const [page, setPage] = useState<number>(1)
@@ -18,9 +19,9 @@ const BlogPage = () => {
   const [sortOrder, setSortOrder] = useState<string>('')
   const [searchTerm, setSearchTerm] = useState<string>('')
 
-  const [deleteBlogCategory, { isLoading: deleteLoader }] =
-    useDeleteBlogMutation()
-
+  const [deleteBlogCategory, { isLoading: deleteLoader }] = useDeleteBlogMutation()
+  
+  
   query['limit'] = size
   query['page'] = page
   query['sortBy'] = sortBy
@@ -37,6 +38,7 @@ const BlogPage = () => {
   const { data, isLoading } = useGetBlogsQuery({ ...query })
   const blogsData = data?.blogs
   const meta = data?.meta
+  
 
   const deleteHandler = async (id: string) => {
     try {

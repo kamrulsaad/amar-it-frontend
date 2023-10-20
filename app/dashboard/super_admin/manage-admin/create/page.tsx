@@ -5,18 +5,18 @@ import FormInput from "@/components/Forms/FormInput";
 import FormSelectField from "@/components/Forms/FormSelectField";
 import FormTextArea from "@/components/Forms/FormTextArea";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
-import UploadImage from "@/components/ui/UploadImage";
-import { useAddAdminWithFormDataMutation } from "@/redux/api/adminApi";
+import {
+  useCreateAdminMutation,
+} from "@/redux/api/adminApi";
 import { useGetPermissionsQuery } from "@/redux/api/permissionApi";
 import { IPermission } from "@/types";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 import { Button, Col, Row, message } from "antd";
 
 const CreateAdminPage = () => {
   const { data } = useGetPermissionsQuery({ limit: 100, page: 1 });
-  const [addAdminWithFormData, { isLoading }] =
-    useAddAdminWithFormDataMutation();
-   const router = useRouter()
+  const [addAdminWithFormData, { isLoading }] = useCreateAdminMutation();
+  const router = useRouter();
   //@ts-ignore
   const departments: IPermission[] = data?.permissions;
 
@@ -30,24 +30,15 @@ const CreateAdminPage = () => {
     });
 
   const onSubmit = async (values: any) => {
-    const obj = { ...values };
-    const file = obj["file"];
-    delete obj["file"];
-    const data = JSON.stringify(obj);
-    const formData = new FormData();
-    formData.append("file", file as Blob);
-    formData.append("data", data);
-
     try {
-      const res = await addAdminWithFormData(formData).unwrap();
+      const res = await addAdminWithFormData(values).unwrap();
       if (!!res) {
         message.success("Admin created successfully!");
-        router.push('/dashboard/super_admin/manage-admin')
+        router.push("/dashboard/super_admin/manage-admin");
       }
-
     } catch (err: any) {
-      for (const error of err.data.errorMessages){
-        message.error(error.message)
+      for (const error of err.data.errorMessages) {
+        message.error(error.message);
       }
     }
   };
@@ -203,15 +194,6 @@ const CreateAdminPage = () => {
                 }}
               >
                 <FormTextArea name="admin.address" rows={2} label="Address" />
-              </Col>
-              <Col
-                className="gutter-row"
-                span={8}
-                style={{
-                  marginBottom: "10px",
-                }}
-              >
-                <UploadImage name="file" />
               </Col>
             </Row>
           </div>

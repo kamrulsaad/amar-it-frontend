@@ -90,7 +90,7 @@ const AdminPage = () => {
       render: function (data: any) {
         return (
           <>
-            <Link href={`/super_admin/admin/details/${data}`}>
+            <Link href={`/dashboard/super_admin/manage-admin/details/${data}`}>
               <Button onClick={() => console.log(data)} type="primary">
                 <EyeOutlined />
               </Button>
