@@ -29,6 +29,45 @@
   }
 }
 
+/* 
+general 
+-------
+*/
+
+body {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  overflow-x: hidden;
+}
+
+.container-fluid {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 15px;
+}
+
+.ant-layout {
+  background: #fff !important;
+}
+
+.mainLayout .ant-layout-header {
+  background: #f8f8f8;
+  padding: 0;
+  height: auto;
+  line-height: 1.6;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: 1.5px;
+}
+
+.bgGray {
+  background: #fafafa;
+}
+
 /* Hero Block  */
 
 .heroBlock {
@@ -38,4 +77,64 @@
   height: calc(100vh - 80px);
   display: flex;
   align-items: center;
+}
+
+/* About Block */
+
+.block {
+  padding: 60px 0;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+/* 
+about
+----- 
+*/
+
+.titleHolder {
+  text-align: center;
+  position: relative;
+  padding: 0 0 20px;
+  margin: 0 0 40px;
+}
+
+.titleHolder:after {
+  transform: translateX(-50%);
+  content: "";
+  background: #5800ff;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  height: 3px;
+  width: 50px;
+}
+
+.titleHolder h2 {
+  font-size: 28px;
+  margin: 0;
+}
+
+.aboutBlock .contentHolder {
+  text-align: center;
+  margin: 0 0 50px;
+  font-weight: 300;
+  letter-spacing: 1.5px;
+  font-size: 16px;
+  line-height: 30px;
+}
+
+.aboutBlock .icon {
+  font-size: 40px;
+  color: #5800ff;
+  margin: 0 0 10px;
+}
+
+.aboutBlock .content {
+  text-align: center;
+}
+
+.aboutBlock .content h3 {
+  font-size: 18px;
+  line-height: 1.2;
+  margin: 0 0 30px;
 }
