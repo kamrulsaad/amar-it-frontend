@@ -5,22 +5,29 @@ import MobileMenu from "./MobileMenu";
 
 const Navbar = () => {
   return (
-    <header className="py-4">
+    <header
+      style={{
+        minHeight: "80px",
+        display: "flex",
+        alignItems: "center",
+        borderBottom: "1px solid #eaeaea",
+        position: "sticky",
+        top: 0,
+        zIndex: 100,
+        backgroundColor: "#fff",
+        padding: "0 1rem",
+      }}
+    >
       <Container>
         <div className="flex items-center justify-between">
-          <div>
-            <Image
-              src={"/logo.png"}
-              width={160}
-              height={60}
-              alt="Amar IT Logo"
-              priority
-            />
-          </div>
-          {/* Menus */}
-          <div className="mobile-hidden">
-            <DynamicMenu />
-          </div>
+          <Image
+            src={"/logo.png"}
+            width={160}
+            height={60}
+            alt="Amar IT Logo"
+            priority
+          />
+          <DynamicMenu />
           <MobileMenu />
         </div>
       </Container>

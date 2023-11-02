@@ -1,4 +1,3 @@
-import Container from "@/components/Container";
 import Navbar from "./_components/Navbar/Navbar";
 import HomeFooter from "./_components/Footer/Footer";
 
@@ -10,8 +9,8 @@ const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <div>
       <Navbar />
-      <Container>{children}</Container>
-      <HomeFooter />
+      {children}
+      {/* <HomeFooter /> */}
     </div>
   );
 };

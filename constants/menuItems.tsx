@@ -52,6 +52,8 @@ const loggedInItems: MenuProps["items"] = [
         style={{
           backgroundColor: "#5800ff",
           color: "#fff",
+          display: "flex",
+          justifyContent: "center",
           alignItems: "center",
         }}
         icon={<UserOutlined />}
@@ -75,7 +77,11 @@ const loggedInItems: MenuProps["items"] = [
         icon: <UserOutlined />,
       },
       {
-        label: <Link href={'#'} onClick={handleLogout}>Log out</Link>,
+        label: (
+          <Link href={"#"} onClick={handleLogout}>
+            Log out
+          </Link>
+        ),
         icon: <LogoutOutlined />,
         key: "setting:4",
       },

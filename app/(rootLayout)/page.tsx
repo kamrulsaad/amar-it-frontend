@@ -8,13 +8,13 @@ const HomePage = () => {
   return (
     <main>
       <Header />
-      <Divider />
+      {/* <Divider />
       <Service />
       <Divider />
       <UpcomingService />
       <Divider />
       <StatisticSection />
-      <Divider />
+      <Divider /> */}
     </main>
   );
 };

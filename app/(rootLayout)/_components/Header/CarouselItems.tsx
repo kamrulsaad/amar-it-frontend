@@ -1,3 +1,4 @@
+import Container from "@/components/Container";
 import { IHomeBannerContent } from "@/types";
 import { Button } from "antd";
 import Image from "next/image";
@@ -9,9 +10,9 @@ interface CarouselItemsProps {
 
 const CarouselItems = ({ item }: CarouselItemsProps) => {
   return (
-    <div className="flex flex-col md:flex-row gap-4 md:min-h-[calc(100vh-95px)] justify-between mx-auto w-full items-center">
-      <div className="space-y-4 text-center md:text-left">
-        <h2 className="text-5xl font-bold">{item.title}</h2>
+    <div className="flex px-4 xl:px-0 flex-col md:flex-row gap-4 md:min-h-[calc(100vh-95px)] mt-20 sm:mt-40 md:mt-0 md:justify-between mx-auto w-full md:items-center">
+      <div className="space-y-4">
+        <h2 className="text-3xl md:text-5xl font-bold">{item.title}</h2>
         <p className="text-xl font-light">{item.content}</p>
         <Button type="primary" size="large">
           <Link href={"/services"}>Learn More</Link>

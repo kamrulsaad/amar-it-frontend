@@ -1,5 +1,6 @@
 import { Carousel } from "antd";
 import CarouselItems from "./CarouselItems";
+import Container from "@/components/Container";
 
 async function getData() {
   const res = await fetch(
@@ -21,11 +22,15 @@ const Header = async () => {
   const data = await getData();
 
   return (
-    <Carousel effect="fade" dots={false} autoplay>
-      {data.map((item: any) => (
-        <CarouselItems key={item.id} item={item} />
-      ))}
-    </Carousel>
+    <div className="heroBlock">
+      <Container>
+        <Carousel effect="fade" dots={false} autoplay>
+          {data.map((item: any) => (
+            <CarouselItems key={item.id} item={item} />
+          ))}
+        </Carousel>
+      </Container>
+    </div>
   );
 };
 
