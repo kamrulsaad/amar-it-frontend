@@ -24,7 +24,7 @@ const CreateBlogContentPage = () => {
     try {
       const res = await addAdminWithFormData(formData).unwrap()
       if (!!res) {
-        router.push('/dashboard/super_admin/faq')
+        router.push('/dashboard/super_admin/banner-content')
         message.success('Home Banner created successfully!')
       }
     } catch (err: any) {
