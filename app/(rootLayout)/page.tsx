@@ -10,13 +10,12 @@ const HomePage = () => {
     <main>
       <Header />
       <About />
-      {/* <Divider /> */}
-      {/* <Service />
-      <Divider />
+      <Service />
+      {/* <Divider />
       <UpcomingService />
       <Divider />
       <StatisticSection />
-      <Divider />  */}
+      <Divider /> */}
     </main>
   );
 };

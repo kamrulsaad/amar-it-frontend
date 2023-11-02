@@ -6,10 +6,21 @@ import { IService } from "@/types";
 import { Badge, Button, Card, Divider, Space, message } from "antd";
 import { useRouter } from "next/navigation";
 import { addToCart } from "@/redux/features/cartSlice";
+import getRandomImage from "@/utils/randomImage";
+import Image from "next/image";
+import Meta from "antd/es/card/Meta";
 
-const ServiceCard = ({ service }: { service: IService }) => {
+const ServiceCard = ({
+  service,
+  index,
+}: {
+  service: IService;
+  index: number;
+}) => {
   const user = getUserInfo() as any;
   const router = useRouter();
+
+  const randomImage = getRandomImage(index);
 
   const dispatch = useAppDispatch();
 
@@ -31,36 +42,65 @@ const ServiceCard = ({ service }: { service: IService }) => {
         width: "100%",
       }}
     >
-      <Badge.Ribbon
-        text={service.status}
-        color={service.status === "active" ? "green" : "red"}
-        style={{
-          zIndex: 1,
-        }}
-      />
+      {service.status === "upcoming" && (
+        <Badge.Ribbon
+          text={service.status}
+          color={"#5800ff"}
+          style={{
+            zIndex: 1,
+          }}
+        />
+      )}
       <Card
         style={{
           textAlign: "center",
         }}
-        title={service.title}
         hoverable
-        cover
+        cover={
+          <Image
+            src={randomImage}
+            alt={service.title}
+            width="260"
+            height={250}
+          />
+        }
       >
-        <h3>Features</h3>
+        <h3
+          style={{
+            fontSize: "1.4rem",
+          }}
+        >
+          {service.title}{" "}
+        </h3>
         {service?.features.map((feature: string) => (
-          <p key={feature}>{feature}</p>
+          <p
+            style={{
+              fontSize: "1.1rem",
+            }}
+            key={feature}
+          >
+            {feature}
+          </p>
         ))}
         <Divider />
-        <p>
-          Only @ <b>{service.charge}</b> ৳{" "}
-        </p>
-        {service.status === "active" ? (
-          <Button onClick={handleAddToCart} type="primary" size="large">
-            Add to Cart
-          </Button>
-        ) : (
-          <></>
-        )}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <p>
+            <b>${service.charge}</b>{" "}
+          </p>
+          {service.status === "active" ? (
+            <Button onClick={handleAddToCart} type="primary" size="large">
+              Add to Cart
+            </Button>
+          ) : (
+            <></>
+          )}
+        </div>
       </Card>
     </Space>
   );
