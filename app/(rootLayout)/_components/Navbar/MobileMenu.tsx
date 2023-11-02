@@ -1,10 +1,10 @@
 "use client";
-
-import items from "@/constants/menuItems";
+import { menuItems } from "@/constants/menuItems";
+import { useAppSelector } from "@/redux/hooks";
 import { MenuFoldOutlined } from "@ant-design/icons";
 import { Button, Drawer, Menu } from "antd";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const MobileMenu = () => {
   const [visible, setVisible] = useState(false);
@@ -16,6 +16,7 @@ const MobileMenu = () => {
   const onClose = () => {
     setVisible(false);
   };
+  const { role } = useAppSelector((state) => state.auth)
 
   return (
     <div className="mobileVisible">
@@ -31,7 +32,7 @@ const MobileMenu = () => {
             }}
             defaultSelectedKeys={["Home"]}
             mode="inline"
-            items={items}
+            items={menuItems(role as string)}
           />
         </nav>
       </Drawer>

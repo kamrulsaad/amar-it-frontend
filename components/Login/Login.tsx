@@ -24,7 +24,6 @@ const Login = () => {
         router.push(`/dashboard`);
         message.success("Login Successful");
       }
-      storeUserInfo({ accessToken: response?.accessToken });
     } catch (error: any) {
       message.error(error?.data?.message || "Something went wrong");
     }
