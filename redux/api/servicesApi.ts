@@ -1,5 +1,6 @@
 import { TagTypes } from "@/redux/tag-types";
 import { baseApi } from "./baseApi";
+import { IMeta, IService } from "@/types";
 
 const SERVICES_URL = "/services";
 
@@ -15,10 +16,17 @@ export const faqApi = baseApi.injectEndpoints({
     }),
 
     getServices: build.query({
-      query: () => ({
+      query: (arg: Record<string, any>) => ({
         url: `${SERVICES_URL}`,
         method: "GET",
+        params: arg,
       }),
+      transformResponse: (response: IService, meta: IMeta) => {
+        return {
+          permissions: response,
+          meta,
+        };
+      },
       providesTags: [TagTypes.services],
     }),
 
@@ -38,7 +46,7 @@ export const faqApi = baseApi.injectEndpoints({
       }),
       onQueryStarted: async ({ faqData, id }, { dispatch, queryFulfilled }) => {
         dispatch(
-          faqApi.util.updateQueryData("getService", id, (draft) => {
+          faqApi.util.updateQueryData("getService", id, (draft: any) => {
             Object.assign(draft, faqData);
           })
         );
@@ -46,7 +54,7 @@ export const faqApi = baseApi.injectEndpoints({
           await queryFulfilled;
         } catch {
           dispatch(
-            faqApi.util.updateQueryData("getService", id, (draft) => {
+            faqApi.util.updateQueryData("getService", id, (draft: any) => {
               Object.assign(draft, { id });
             })
           );
