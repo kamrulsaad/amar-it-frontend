@@ -26,8 +26,8 @@ const MobileMenu = () => {
         <nav>
           <Menu
             style={{
-              borderBottom: "none",
               width: "100%",
+              borderRight: "none",
             }}
             defaultSelectedKeys={["Home"]}
             mode="inline"

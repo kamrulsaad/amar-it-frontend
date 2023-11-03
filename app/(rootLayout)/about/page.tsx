@@ -1,3 +1,11 @@
+import { Metadata } from "next";
+import About from "../_components/about/About";
+
+export const metadata: Metadata = {
+  title: "About Us | Amar IT",
+  description: "The best internet service provider",
+};
+
 const AboutPage = () => {
   return (
     <div
@@ -5,14 +13,7 @@ const AboutPage = () => {
         minHeight: "100vh",
       }}
     >
-      <h1
-        style={{
-          textAlign: "center",
-          margin: "20px 0",
-        }}
-      >
-        About Page - Coming Soon
-      </h1>
+      <About />
     </div>
   );
 };

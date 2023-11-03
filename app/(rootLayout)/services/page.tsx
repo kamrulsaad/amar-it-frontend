@@ -28,20 +28,25 @@ const ServicePage = async () => {
         marginBottom: "20px",
       }}
     >
-      <h2
-        style={{
-          textAlign: "center",
-        }}
-      >
-        Our Services
-      </h2>
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-        {data.map((service: IService) => (
-          <Col key={service.id} className="gutter-row" span={8}>
-            <ServiceCard service={service} />
-          </Col>
-        ))}
-      </Row>
+      <div className="block featureBlock bgGray">
+        <div className="container-fluid">
+          <div className="titleHolder">
+            <h2>Our Services</h2>
+          </div>
+          <Row gutter={[16, 16]}>
+            {data.map((service: IService, index: number) => (
+              <Col
+                key={service.id}
+                xs={{ span: 24 }}
+                sm={{ span: 12 }}
+                md={{ span: 8 }}
+              >
+                <ServiceCard servicePage index={index} service={service} />
+              </Col>
+            ))}
+          </Row>
+        </div>
+      </div>
     </main>
   );
 };

@@ -8,14 +8,15 @@ import { useRouter } from "next/navigation";
 import { addToCart } from "@/redux/features/cartSlice";
 import getRandomImage from "@/utils/randomImage";
 import Image from "next/image";
-import Meta from "antd/es/card/Meta";
 
 const ServiceCard = ({
   service,
   index,
+  servicePage,
 }: {
   service: IService;
   index: number;
+  servicePage?: boolean;
 }) => {
   const user = getUserInfo() as any;
   const router = useRouter();
@@ -34,6 +35,18 @@ const ServiceCard = ({
     router.push("/cart");
   };
 
+  const BadgeComponet = ({ status }: { status: string }) => {
+    return (
+      <Badge.Ribbon
+        text={status}
+        color={"#5800ff"}
+        style={{
+          zIndex: 1,
+        }}
+      />
+    );
+  };
+
   return (
     <Space
       direction="vertical"
@@ -42,14 +55,12 @@ const ServiceCard = ({
         width: "100%",
       }}
     >
-      {service.status === "upcoming" && (
-        <Badge.Ribbon
-          text={service.status}
-          color={"#5800ff"}
-          style={{
-            zIndex: 1,
-          }}
-        />
+      {servicePage ? (
+        <BadgeComponet status={service.status} />
+      ) : (
+        service.status === "upcoming" && (
+          <BadgeComponet status={service.status} />
+        )
       )}
       <Card
         style={{

@@ -6,6 +6,8 @@ import img5 from "@/assets/services/5.jpg";
 import img6 from "@/assets/services/6.jpg";
 
 function getRandomImage(index: number) {
+  index > 5 && (index = index - 6);
+
   const imageNames = [img1, img2, img3, img4, img5, img6];
   return imageNames[index];
 }

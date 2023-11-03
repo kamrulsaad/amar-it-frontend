@@ -86,6 +86,7 @@ export type IPackage = {
   updatedAt: string;
   service: IService;
 };
+
 export type IBlog = {
   id: string;
   title: string;
