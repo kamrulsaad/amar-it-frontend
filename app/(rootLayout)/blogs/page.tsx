@@ -37,7 +37,7 @@ const BlogPage = async () => {
       <div className="block featureBlock bgGray">
         <div className="container-fluid">
           <div className="titleHolder">
-            <h2>Our Services</h2>
+            <h2>Blogs</h2>
           </div>
           <Row gutter={24}>
             {data.map((service: IBlog) => (

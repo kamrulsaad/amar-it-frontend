@@ -11,10 +11,20 @@ import {
   useDeleteBookingMutation,
   useGetBookingsQuery,
 } from "@/redux/api/bookingApi";
+import { getUserInfo } from "@/services/auth.service";
+import { useEffect } from "react";
 
 const BookingPage = () => {
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
+  const { username } = getUserInfo() as any;
+
   const [deleteFaq] = useDeleteBookingMutation();
-  const { data, isLoading } = useGetBookingsQuery({});
+  const { data, isLoading } = useGetBookingsQuery({
+    username,
+  });
   const faqData = data?.bookings;
   // const meta = data?.meta
 
@@ -22,7 +32,7 @@ const BookingPage = () => {
     try {
       const res = await deleteFaq(id);
       if (!!res) {
-        message.success("Faq Deleted Successfully");
+        message.success("Booking Deleted Successfully");
       }
     } catch (err: any) {
       message.error(err.message);
@@ -30,6 +40,31 @@ const BookingPage = () => {
   };
 
   const columns = [
+    {
+      title: "Service Name",
+      dataIndex: "service",
+      render: function (data: any) {
+        return data?.title;
+      },
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      render: function (data: string) {
+        switch (data) {
+          case "pending":
+            return (
+              <span className="text-yellow-500 font-semibold">Pending</span>
+            );
+          case "completed":
+            return <span className="text-green-500">Completed</span>;
+          case "rejected":
+            return <span className="text-red-500">Rejected</span>;
+          default:
+            return <span className="text-yellow-500">Pending</span>;
+        }
+      },
+    },
     {
       title: "Start Time",
       dataIndex: "startTime",
@@ -48,25 +83,16 @@ const BookingPage = () => {
       sorter: true,
     },
     {
-      title: "Created at",
-      dataIndex: "createdAt",
-      render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
-      },
-      sorter: true,
-    },
-    {
       title: "Action",
       dataIndex: "id",
       render: function (data: any) {
         return (
           <>
-            <Link href={`/dashboard/super_admin/faq/edit/${data}`}>
+            <Link href={`/dashboard/customer/booking/edit/${data}`}>
               <Button
                 style={{
-                  margin: "0px 5px",
+                  marginRight: "5px",
                 }}
-                onClick={() => console.log(data)}
                 type="primary"
               >
                 <EditOutlined />
@@ -86,13 +112,13 @@ const BookingPage = () => {
       <UMBreadCrumb
         items={[
           {
-            label: "super_admin",
-            link: "/dashboard/super_admin",
+            label: "customer",
+            link: "/customer",
           },
         ]}
       />
 
-      <ActionBar title="Faq List">
+      <ActionBar title="My Bookings">
         <div>
           <Link href="/dashboard/super_admin/faq/create">
             <Button type="primary">Create</Button>
