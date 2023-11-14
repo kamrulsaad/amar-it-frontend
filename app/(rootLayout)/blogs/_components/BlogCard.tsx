@@ -1,5 +1,5 @@
 import { IBlog } from "@/types";
-import { Badge, Card } from "antd";
+import { Card } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import Meta from "antd/es/card/Meta";
@@ -13,8 +13,8 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
           src={blog.image}
           alt={blog.title}
           objectFit="cover"
-          width={300}
-          height={200}
+          width={320}
+          height={180}
         />
       }
       actions={[

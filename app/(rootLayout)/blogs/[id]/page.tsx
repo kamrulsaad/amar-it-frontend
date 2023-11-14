@@ -30,29 +30,21 @@ const BlogDetails = async ({ params: { id } }: BlogDetailsProps) => {
   return (
     <main className="bgGray pt-4 min-h-screen">
       <Container>
-        <div className="md:flex gap-x-4 px-2 md:px-0">
-          <div>
-            <Image
-              className="rounded-lg"
-              src={data.image}
-              alt={data.title}
-              width={500}
-              height={300}
-              layout="intrinsic"
-              fetchPriority="high"
-            />
-            <div>
-              <p>Category: {data.blogCategory.title}</p>
-              <p>
-                Date: {dayjs(data.createdAt).format("DD MMMM YYYY, h:mm:ss a")}
-              </p>
-            </div>
-          </div>
-          <div>
-            <h1>{data.title}</h1>
-            <p>{data.content}</p>
-          </div>
-        </div>
+        <Image
+          className="rounded-lg relative max-w-7xl px-4 xl:px-0 mx-auto w-full xs:max-h-[50vh] md:max-h-[70vh] max-h-[30vh]"
+          src={data.image}
+          alt={data.title}
+          fill={true}
+          objectFit="cover"
+          fetchPriority="high"
+        />
+        <h1>{data.title}</h1>
+        <p className="text-xs mb-4">
+          {" "}
+          <b>Category:</b> {data.blogCategory.title} |{" "}
+          <b>Date:</b> {dayjs(data.createdAt).format("DD MMMM YYYY, h:mm:ss a")}
+        </p>
+        <p>{data.content}</p>
       </Container>
     </main>
   );

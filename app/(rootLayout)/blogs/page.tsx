@@ -39,7 +39,7 @@ const BlogPage = async () => {
           <div className="titleHolder">
             <h2>Our Services</h2>
           </div>
-          <Row gutter={[16, 16]}>
+          <Row gutter={24}>
             {data.map((service: IBlog) => (
               <Col
                 key={service.id}

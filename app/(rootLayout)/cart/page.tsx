@@ -58,112 +58,106 @@ const CartPage = () => {
   };
 
   return (
-    <Container>
-      <h1
-        className="pl-4 md:pl-0"
-        style={{
-          marginTop: "20px",
-        }}
-      >
-        Cart
-      </h1>
-      <h3
-        className="pl-4 md:pl-0"
-        style={{
-          fontWeight: "normal",
-        }}
-      >
-        Please fill in the form below to place your order.
-      </h3>
-      <div className="flex justify-between items-stretch flex-col md:flex-row md:my-12 my-8 mx-4 md:mx-0 gap-4">
-        <div
-          className="md:w-[70%] w-full"
+    <div className="bgGray ">
+      <Container>
+        <h1 className="pl-4 md:pl-0 pt-5">Cart</h1>
+        <h3
+          className="pl-4 md:pl-0"
           style={{
-            backgroundColor: "#fff",
-            borderRadius: "10px",
-            border: "5px solid #ddd",
-            padding: "20px 40px",
+            fontWeight: "normal",
           }}
         >
-          <h3
+          Please fill in the form below to place your order.
+        </h3>
+        <div className="flex justify-between items-stretch flex-col md:flex-row md:py-12 py-8 mx-4 md:mx-0 gap-4">
+          <div
+            className="md:w-[70%] w-full"
             style={{
-              margin: "20px 0",
+              backgroundColor: "#fff",
+              borderRadius: "10px",
+              border: "5px solid #ddd",
+              padding: "20px 40px",
             }}
           >
-            {service?.title}
-          </h3>
-          <p
-            style={{
-              margin: "20px 0",
-            }}
-          >
-            {service?.description} <br />
-          </p>
-          {service?.features?.map((feature: string) => (
+            <h3
+              style={{
+                margin: "20px 0",
+              }}
+            >
+              {service?.title}
+            </h3>
             <p
               style={{
-                fontSize: "1.1rem",
+                margin: "20px 0",
               }}
-              key={feature}
             >
-              {feature}
+              {service?.description} <br />
             </p>
-          ))}
-          <Divider />
-          <p
+            {service?.features?.map((feature: string) => (
+              <p
+                style={{
+                  fontSize: "1.1rem",
+                }}
+                key={feature}
+              >
+                {feature}
+              </p>
+            ))}
+            <Divider />
+            <p
+              style={{
+                margin: "20px 0",
+              }}
+            >
+              Only @ <b> {service?.charge} </b> <br />
+            </p>
+          </div>
+          <div
             style={{
-              margin: "20px 0",
+              backgroundColor: "#fff",
+              borderRadius: "10px",
+              border: "5px solid #ddd",
+              padding: "20px 40px",
             }}
           >
-            Only @ <b> {service?.charge} </b> <br />
-          </p>
+            <Form onSubmit={handleSubmit}>
+              <Row gutter={24}>
+                <Col span={24} style={{ margin: "2px 0" }}>
+                  <h1>Booking Information</h1>
+                </Col>
+              </Row>
+              <Row gutter={24}>
+                <Col span={24} style={{ margin: "10px 0" }}>
+                  <FormTimePicker name="startTime" label="Start Time" />
+                </Col>
+              </Row>
+              <Row gutter={24}>
+                <Col span={24} style={{ margin: "10px 0" }}>
+                  <FormTimePicker name="endTime" label="End Time" />
+                </Col>
+              </Row>
+              <Row gutter={24}>
+                <Col span={24} style={{ margin: "10px 0" }}>
+                  <FormDatePicker
+                    size="large"
+                    name="date"
+                    label="Date of Booking"
+                  />
+                </Col>
+              </Row>
+              <Button
+                style={{ margin: "10px 0" }}
+                loading={isLoading}
+                type="primary"
+                htmlType="submit"
+              >
+                Confirm Booking
+              </Button>
+            </Form>
+          </div>
         </div>
-        <div
-          style={{
-            backgroundColor: "#fff",
-            borderRadius: "10px",
-            border: "5px solid #ddd",
-            padding: "20px 40px",
-          }}
-        >
-          <Form onSubmit={handleSubmit}>
-            <Row gutter={24}>
-              <Col span={24} style={{ margin: "2px 0" }}>
-                <h1>Booking Information</h1>
-              </Col>
-            </Row>
-            <Row gutter={24}>
-              <Col span={24} style={{ margin: "10px 0" }}>
-                <FormTimePicker name="startTime" label="Start Time" />
-              </Col>
-            </Row>
-            <Row gutter={24}>
-              <Col span={24} style={{ margin: "10px 0" }}>
-                <FormTimePicker name="endTime" label="End Time" />
-              </Col>
-            </Row>
-            <Row gutter={24}>
-              <Col span={24} style={{ margin: "10px 0" }}>
-                <FormDatePicker
-                  size="large"
-                  name="date"
-                  label="Date of Booking"
-                  
-                />
-              </Col>
-            </Row>
-            <Button
-              style={{ margin: "10px 0" }}
-              loading={isLoading}
-              type="primary"
-              htmlType="submit"
-            >
-              Confirm Booking
-            </Button>
-          </Form>
-        </div>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 };
 

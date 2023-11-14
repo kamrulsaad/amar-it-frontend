@@ -2,6 +2,7 @@ import Container from "@/components/Container";
 import Image from "next/image";
 import DynamicMenu from "./DynamicMenu";
 import MobileMenu from "./MobileMenu";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
@@ -20,13 +21,15 @@ const Navbar = () => {
     >
       <Container>
         <div className="flex items-center justify-between">
-          <Image
-            src={"/logo.png"}
-            width={160}
-            height={60}
-            alt="Amar IT Logo"
-            priority
-          />
+          <Link href="/">
+            <Image
+              src={"/logo.png"}
+              width={160}
+              height={60}
+              alt="Amar IT Logo"
+              priority
+            />
+          </Link>
           <DynamicMenu />
           <MobileMenu />
         </div>

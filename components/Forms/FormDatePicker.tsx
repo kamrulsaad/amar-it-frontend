@@ -1,4 +1,5 @@
 import { DatePicker, DatePickerProps } from "antd";
+import { RangePickerProps } from "antd/es/date-picker";
 import dayjs, { Dayjs } from "dayjs";
 import { Controller, useFormContext } from "react-hook-form";
 
@@ -24,6 +25,12 @@ const FormDatePicker = ({
     setValue(name, dateString);
   };
 
+  // eslint-disable-next-line arrow-body-style
+  const disabledDate: RangePickerProps["disabledDate"] = (current) => {
+    // Can not select days before today and today
+    return current && current < dayjs().endOf("day");
+  };
+
   return (
     <div>
       {label ? label : null}
@@ -33,6 +40,7 @@ const FormDatePicker = ({
         name={name}
         render={({ field }) => (
           <DatePicker
+            disabledDate={disabledDate}
             defaultValue={value && dayjs(field.value)}
             size={size}
             style={{ width: "100%" }}
