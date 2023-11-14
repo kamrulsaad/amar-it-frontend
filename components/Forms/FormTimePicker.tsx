@@ -19,7 +19,7 @@ export default function FormTimePicker({ name, label }: FormTimePickerProps) {
         render={({ field }) => (
           <TimePicker
             size="large"
-            defaultValue={dayjs(field.value ? field.value : "00:00", "HH:mm")}
+            defaultValue={field.value && dayjs(field.value)}
             format={"HH:mm"}
             onChange={(el, value) => {
               setValue(name, value);

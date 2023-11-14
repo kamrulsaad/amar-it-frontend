@@ -4,7 +4,7 @@ import { IService } from "@/types";
 
 async function getData() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/services?status=active&limit=6`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/services?status=active&limit=6&sortBy=charge&sortOrder=asc`,
     {
       cache: "no-cache",
     }

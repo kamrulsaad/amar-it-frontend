@@ -4,7 +4,7 @@ import ServiceCard from "../Services/ServiceCard";
 
 async function getData() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/services?status=upcoming&limit=3`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/services?status=upcoming&limit=3&sortBy=charge&sortOrder=asc`,
     {
       cache: "no-cache",
     }

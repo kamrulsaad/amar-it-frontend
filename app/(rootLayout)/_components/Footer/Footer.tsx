@@ -1,4 +1,3 @@
-import { BackTop } from "antd";
 import Image from "next/image";
 import {
   FacebookOutlined,
@@ -7,6 +6,7 @@ import {
   TwitterOutlined,
 } from "@ant-design/icons";
 import { Footer } from "antd/es/layout/layout";
+import BackToTopButton from "./_component/BackToTopButton";
 
 function HomeFooter() {
   return (
@@ -39,11 +39,7 @@ function HomeFooter() {
             </li>
           </ul>
           <div className="copyright">Copyright &copy; 2023 Amar IT</div>
-          <BackTop>
-            <div className="goTop">
-              <i className="fas fa-arrow-circle-up"></i>
-            </div>
-          </BackTop>
+          <BackToTopButton />
         </div>
       </div>
     </Footer>
