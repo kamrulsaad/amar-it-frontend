@@ -1,4 +1,3 @@
-import { use } from 'react'
 import { getUserInfo, storeUserInfo } from '@/services/auth.service'
 import { TagTypes } from '../tag-types'
 import { baseApi } from './baseApi'
@@ -45,6 +44,21 @@ export const authApi = baseApi.injectEndpoints({
         method: 'POST',
         data: changePasswordData,
       }),
+      async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled
+          storeUserInfo({ accessToken: data?.accessToken })
+          const user = getUserInfo() as any
+          dispatch(
+            userLoggedIn({
+              username: user.username,
+              role: user.role,
+            })
+          )
+        } catch (err) {
+          console.log(err)
+        }
+      },
       invalidatesTags: [TagTypes.user],
     }),
   }),
