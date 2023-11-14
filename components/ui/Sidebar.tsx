@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Layout, Menu } from "antd";
 import { sidebarItems } from "@/constants/sidebarItems";
 import Image from "next/image";
@@ -9,10 +9,17 @@ import Link from "next/link";
 
 const { Sider } = Layout;
 
-const { role } = getUserInfo() as any;
-
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
+
+  const { role } = getUserInfo() as any;
+
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setCollapsed(true);
+    }
+    getUserInfo();
+  }, []);
 
   return (
     <Sider

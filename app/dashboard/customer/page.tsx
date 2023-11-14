@@ -2,9 +2,8 @@
 
 import { useCustomersQuery } from "@/redux/api/customerApi";
 import { getUserInfo } from "@/services/auth.service";
-import { Avatar, Button } from "antd";
-import { EditOutlined, UserOutlined } from "@ant-design/icons";
-import Image from "next/image";
+import { Button } from "antd";
+import { EditOutlined } from "@ant-design/icons";
 
 const CustomerPage = () => {
   const { username } = getUserInfo() as any;

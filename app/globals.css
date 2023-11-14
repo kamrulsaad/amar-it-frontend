@@ -74,7 +74,7 @@ p {
   background: url("../assets/bg-hero.jpg") no-repeat;
   background-position: 50% 100%;
   background-size: cover;
-  height: calc(100vh - 80px);
+  min-height: calc(100vh - 80px);
   display: flex;
   align-items: center;
 }
@@ -246,12 +246,4 @@ footer
 
 .footer .copyright {
   margin: 20px 0 20px;
-}
-
-.mobileVisible {
-  display: none;
-}
-
-.mobileHidden {
-  display: block;
 }
