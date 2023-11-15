@@ -1,6 +1,6 @@
 import Container from "@/components/Container";
 import dayjs from "dayjs";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 interface BlogDetailsProps {
   params: {

@@ -2,7 +2,7 @@ import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import { message, Upload } from 'antd'
 import type { UploadChangeParam } from 'antd/es/upload'
 import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface'
-import Image from 'next/image'
+import Image from "next/legacy/image"
 import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 

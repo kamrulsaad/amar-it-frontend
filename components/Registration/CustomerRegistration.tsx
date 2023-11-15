@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { SubmitHandler } from "react-hook-form";
 import { CustomerSignUpFormType, customerSignUpResolver } from "@/schemas/user";
 import { useCustomerSignUpMutation } from "@/redux/api/authApi";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import LoginImage from "@/assets/login-image.svg";
 import FormTextArea from "../Forms/FormTextArea";
 

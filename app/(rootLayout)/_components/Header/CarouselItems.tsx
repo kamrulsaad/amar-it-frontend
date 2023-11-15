@@ -1,7 +1,7 @@
 
 import { IHomeBannerContent } from "@/types";
 import { Button } from "antd";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 
 interface CarouselItemsProps {

@@ -7,7 +7,7 @@ import { Badge, Button, Card, Divider, Space, message } from "antd";
 import { useRouter } from "next/navigation";
 import { addToCart } from "@/redux/features/cartSlice";
 import getRandomImage from "@/utils/randomImage";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 const ServiceCard = ({
   service,

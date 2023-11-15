@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Layout, Menu } from "antd";
 import { sidebarItems } from "@/constants/sidebarItems";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { getUserInfo } from "@/services/auth.service";
 import Link from "next/link";
 

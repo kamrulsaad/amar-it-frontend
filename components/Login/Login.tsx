@@ -2,7 +2,7 @@
 
 import { Col, Row, Button, message } from "antd";
 import LoginImage from "@/assets/login-image.svg";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import { useUserLoginMutation } from "@/redux/api/authApi";
