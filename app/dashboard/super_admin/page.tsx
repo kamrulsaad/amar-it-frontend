@@ -3,7 +3,7 @@
 import { getUserInfo } from "@/services/auth.service";
 import { Avatar, Button } from "antd";
 import { EditOutlined, UserOutlined } from "@ant-design/icons";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useAdminsQuery } from "@/redux/api/adminApi";
 
 const SAdminProfilePage = () => {

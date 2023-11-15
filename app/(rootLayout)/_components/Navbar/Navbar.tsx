@@ -1,5 +1,5 @@
 import Container from "@/components/Container";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import DynamicMenu from "./DynamicMenu";
 import MobileMenu from "./MobileMenu";
 import Link from "next/link";
@@ -28,7 +28,10 @@ const Navbar = () => {
               height={60}
               alt="Amar IT Logo"
               priority
-            />
+              style={{
+                maxWidth: "100%",
+                height: "auto"
+              }} />
           </Link>
           <DynamicMenu />
           <MobileMenu />

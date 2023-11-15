@@ -1,6 +1,6 @@
 import Container from "@/components/Container";
 import dayjs from "dayjs";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 interface BlogDetailsProps {
   params: {
@@ -35,9 +35,11 @@ const BlogDetails = async ({ params: { id } }: BlogDetailsProps) => {
           src={data.image}
           alt={data.title}
           fill={true}
-          objectFit="cover"
           fetchPriority="high"
-        />
+          style={{
+            maxWidth: "100%",
+            objectFit: "cover"
+          }} />
         <h1>{data.title}</h1>
         <p className="text-xs mb-4">
           {" "}

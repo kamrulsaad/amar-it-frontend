@@ -2,7 +2,7 @@ import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import { message, Upload } from 'antd'
 import type { UploadChangeParam } from 'antd/es/upload'
 import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface'
-import Image from "next/legacy/image"
+import Image from "next/image"
 import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -57,31 +57,32 @@ const UploadImage = ({ name }: ImageUploadProps) => {
     </div>
   )
 
-  return (
-    <>
-      <Upload
-        name={name}
-        listType='picture-card'
-        className='avatar-uploader'
-        showUploadList={false}
-        action='/api/file'
-        beforeUpload={beforeUpload}
-        onChange={handleChange}
-      >
-        {imageUrl ? (
-          <Image
-            src={imageUrl}
-            alt='avatar'
-            style={{ width: '100%' }}
-            width={100}
-            height={100}
-          />
-        ) : (
-          uploadButton
-        )}
-      </Upload>
-    </>
-  )
+  return <>
+    <Upload
+      name={name}
+      listType='picture-card'
+      className='avatar-uploader'
+      showUploadList={false}
+      action='/api/file'
+      beforeUpload={beforeUpload}
+      onChange={handleChange}
+    >
+      {imageUrl ? (
+        <Image
+          src={imageUrl}
+          alt='avatar'
+          width={100}
+          height={100}
+          style={{
+            width: '100%',
+            maxWidth: "100%",
+            height: "auto"
+          }} />
+      ) : (
+        uploadButton
+      )}
+    </Upload>
+  </>;
 }
 
 export default UploadImage

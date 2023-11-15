@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import {
   FacebookOutlined,
   InstagramOutlined,
@@ -14,7 +14,15 @@ function HomeFooter() {
       <div className="container-fluid">
         <div className="footer">
           <div className="logo">
-            <Image src={"/dark_logo.png"} alt="logo" width={200} height={80} />
+            <Image
+              src={"/dark_logo.png"}
+              alt="logo"
+              width={200}
+              height={80}
+              style={{
+                maxWidth: "100%",
+                height: "auto"
+              }} />
           </div>
           <ul className="socials">
             <li>

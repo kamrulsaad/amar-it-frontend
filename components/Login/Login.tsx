@@ -2,7 +2,7 @@
 
 import { Col, Row, Button, message } from "antd";
 import LoginImage from "@/assets/login-image.svg";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import { useUserLoginMutation } from "@/redux/api/authApi";
@@ -38,7 +38,15 @@ const Login = () => {
       }}
     >
       <Col sm={12} md={16} lg={10}>
-        <Image priority src={LoginImage} alt="login image" width={500} />
+        <Image
+          priority
+          src={LoginImage}
+          alt="login image"
+          width={500}
+          style={{
+            maxWidth: "100%",
+            height: "auto"
+          }} />
       </Col>
       <Col sm={12} md={8} lg={8}>
         <h1

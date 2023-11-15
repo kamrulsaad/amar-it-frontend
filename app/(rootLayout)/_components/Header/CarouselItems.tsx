@@ -1,7 +1,7 @@
 
 import { IHomeBannerContent } from "@/types";
 import { Button } from "antd";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 
 interface CarouselItemsProps {
@@ -25,8 +25,10 @@ const CarouselItems = ({ item }: CarouselItemsProps) => {
           fetchPriority="high"
           width={500}
           height={500}
-          layout="intrinsic"
-        />
+          style={{
+            maxWidth: "100%",
+            height: "auto"
+          }} />
       </div>
     </div>
   );

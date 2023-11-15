@@ -7,7 +7,7 @@ import { Badge, Button, Card, Divider, Space, message } from "antd";
 import { useRouter } from "next/navigation";
 import { addToCart } from "@/redux/features/cartSlice";
 import getRandomImage from "@/utils/randomImage";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 const ServiceCard = ({
   service,
@@ -73,7 +73,10 @@ const ServiceCard = ({
             alt={service.title}
             width="260"
             height={250}
-          />
+            style={{
+              maxWidth: "100%",
+              height: "auto"
+            }} />
         }
       >
         <h3

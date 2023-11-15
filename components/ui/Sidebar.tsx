@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Layout, Menu } from "antd";
 import { sidebarItems } from "@/constants/sidebarItems";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { getUserInfo } from "@/services/auth.service";
 import Link from "next/link";
 
@@ -51,7 +51,10 @@ const Sidebar = () => {
             alt="logo"
             width={collapsed ? 40 : 100}
             height={40}
-          />
+            style={{
+              maxWidth: "100%",
+              height: "auto"
+            }} />
         </Link>
       </div>
       <Menu
