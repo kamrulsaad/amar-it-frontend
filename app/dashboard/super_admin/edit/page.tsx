@@ -6,9 +6,7 @@ import FormTextArea from "@/components/Forms/FormTextArea";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import UploadImage from "@/components/ui/UploadImage";
 import { useAdminsQuery, useUpdateAdminMutation } from "@/redux/api/adminApi";
-import {
-  useUpdateCustomerMutation,
-} from "@/redux/api/customerApi";
+import { useUpdateCustomerMutation } from "@/redux/api/customerApi";
 import { getUserInfo } from "@/services/auth.service";
 
 import { Button, Col, Row, message } from "antd";
@@ -58,8 +56,8 @@ const EditSuperAdmin = () => {
         body: formData,
       }).unwrap();
       if (!!response) {
-        router.push("/dashboard/customer/");
-        message.success("Customer updated successfully!");
+        router.push("/dashboard/super_admin/");
+        message.success("Profile updated successfully!");
       }
     } catch (err: any) {
       for (const error of err.data.errorMessages) {
@@ -73,8 +71,8 @@ const EditSuperAdmin = () => {
       <UMBreadCrumb
         items={[
           {
-            label: "customer",
-            link: "/customer",
+            label: "profile",
+            link: "/super_admin",
           },
         ]}
       />

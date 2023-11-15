@@ -46,13 +46,12 @@ export const adminApi = baseApi.injectEndpoints({
       invalidatesTags: [TagTypes.admin],
     }),
     updateAdmin: build.mutation({
-      query: (data) => {
-        return {
-          url: `${ADMIN_URL}/${data.id}`,
-          method: "PATCH",
-          data: data.body,
-        };
-      },
+      query: (data) => ({
+        url: `${ADMIN_URL}/${data.id}`,
+        method: "PATCH",
+        data: data.body,
+        contentType: "multipart/form-data",
+      }),
       invalidatesTags: [TagTypes.admin],
     }),
   }),

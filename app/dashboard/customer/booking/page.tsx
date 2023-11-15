@@ -78,7 +78,7 @@ const BookingPage = () => {
       title: "Date of booking",
       dataIndex: "date",
       render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
+        return data && dayjs(data).format("MMM D, YYYY");
       },
       sorter: true,
     },
