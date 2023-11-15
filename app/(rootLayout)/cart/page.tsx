@@ -10,16 +10,23 @@ import { getUserInfo } from "@/services/auth.service";
 import { IBooking, IGenericErrorResponse } from "@/types";
 import { Button, Col, Divider, Row, message } from "antd";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import StripeCheckout from "react-stripe-checkout";
+import CartServiceCard from "./_components/cartServiceCard";
+import { useMakePaymentMutation } from "@/redux/api/paymentApi";
 
 const CartPage = () => {
   const router = useRouter();
+
+  const [bookingCompleted, setBookingCompleted] = useState<boolean>(false);
 
   const user = getUserInfo() as any;
 
   const { service } = useAppSelector((state) => state.cart);
 
   const [createBooking, { isLoading }] = useCreateBookingMutation();
+
+  const [makePayment] = useMakePaymentMutation();
 
   useEffect(() => {
     if (!service?.id) {
@@ -37,6 +44,8 @@ const CartPage = () => {
 
   const handleSubmit = async (data: any) => {
     try {
+      if (bookingCompleted) return;
+
       const body = {
         ...data,
         serviceId: service.id,
@@ -48,6 +57,26 @@ const CartPage = () => {
 
       if (booking?.id) {
         message.success("Booking successful");
+        setBookingCompleted(() => true);
+      }
+    } catch (error: any) {
+      for (const err of error.data.errorMessages) {
+        message.error(err.message);
+      }
+    }
+  };
+
+  const successPaymentHandlerStripe = async (token: any) => {
+    try {
+      const body = {
+        stripeToken: token,
+        totalPrice: service.charge,
+      };
+
+      const result = await makePayment(body).unwrap();
+
+      if (result?.success) {
+        message.success("Payment successful");
         router.push("/dashboard/customer/booking");
       }
     } catch (error: any) {
@@ -70,48 +99,7 @@ const CartPage = () => {
           Please fill in the form below to place your order.
         </h3>
         <div className="flex justify-between items-stretch flex-col md:flex-row md:py-12 py-8 mx-4 md:mx-0 gap-4">
-          <div
-            className="md:w-[70%] w-full"
-            style={{
-              backgroundColor: "#fff",
-              borderRadius: "10px",
-              border: "5px solid #ddd",
-              padding: "20px 40px",
-            }}
-          >
-            <h3
-              style={{
-                margin: "20px 0",
-              }}
-            >
-              {service?.title}
-            </h3>
-            <p
-              style={{
-                margin: "20px 0",
-              }}
-            >
-              {service?.description} <br />
-            </p>
-            {service?.features?.map((feature: string) => (
-              <p
-                style={{
-                  fontSize: "1.1rem",
-                }}
-                key={feature}
-              >
-                {feature}
-              </p>
-            ))}
-            <Divider />
-            <p
-              style={{
-                margin: "20px 0",
-              }}
-            >
-              Only @ <b> {service?.charge} </b> <br />
-            </p>
-          </div>
+          <CartServiceCard service={service} />
           <div
             style={{
               backgroundColor: "#fff",
@@ -145,14 +133,26 @@ const CartPage = () => {
                   />
                 </Col>
               </Row>
-              <Button
-                style={{ margin: "10px 0" }}
-                loading={isLoading}
-                type="primary"
-                htmlType="submit"
-              >
-                Confirm Booking
-              </Button>
+              {bookingCompleted ? (
+                <StripeCheckout
+                  stripeKey={
+                    "pk_test_51OCpX2EoZ8jVom2APwgYRYV4A56vBZO5AcHbKYf2vlfalZpxDk4L4HW7DXu3BbmALQCHCBepiDwmBA9EZZcIOwhb00VGaaSOOY"
+                  }
+                  amount={service.charge * 100}
+                  shippingAddress
+                  token={successPaymentHandlerStripe}
+                  currency="USD"
+                />
+              ) : (
+                <Button
+                  style={{ margin: "10px 0" }}
+                  loading={isLoading}
+                  type="primary"
+                  htmlType="submit"
+                >
+                  Confirm Booking
+                </Button>
+              )}
             </Form>
           </div>
         </div>
