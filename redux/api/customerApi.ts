@@ -6,15 +6,6 @@ const CUSTOMER_URL = "/customers";
 
 export const customerApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    addCustomerWithFormData: build.mutation({
-      query: (data) => ({
-        url: "/auth/signup",
-        method: "POST",
-        data,
-        contentType: "multipart/form-data",
-      }),
-      invalidatesTags: [TagTypes.customer],
-    }),
 
     customers: build.query({
       query: (arg: Record<string, any>) => {
@@ -61,7 +52,6 @@ export const customerApi = baseApi.injectEndpoints({
 export const {
   useCustomersQuery,
   useCustomerQuery,
-  useAddCustomerWithFormDataMutation,
   useUpdateCustomerMutation,
   useDeleteCustomerMutation,
 } = customerApi;
