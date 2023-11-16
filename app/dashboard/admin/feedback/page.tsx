@@ -2,7 +2,7 @@
 
 const FeedbacksPage = () => {
   return (
-    <div>FeedbacksPage</div>
+    <div>Feedback Feature Coming Soon</div>
   )
 }
 

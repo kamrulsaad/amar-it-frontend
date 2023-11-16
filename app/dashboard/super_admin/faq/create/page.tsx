@@ -1,4 +1,5 @@
 'use client'
+
 import Form from '@/components/Forms/Form'
 import FormInput from '@/components/Forms/FormInput'
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb'
@@ -7,11 +8,12 @@ import { Button, Col, Row, message } from 'antd'
 import { SubmitHandler } from 'react-hook-form'
 import { useCreatFaqMutation } from '@/redux/api/faq/faqApi'
 import { CreateFaqFormType, createFaqResolver } from '@/schemas/faq'
+
 const CreateDepartmentPage = () => {
+
   const [creatFaq, { isLoading }] = useCreatFaqMutation()
   const router = useRouter()
   const onSubmit: SubmitHandler<CreateFaqFormType> = async (data) => {
-    message.loading('Creating.....')
     try {
       const response = await creatFaq({ ...data }).unwrap()
       if (!!response) {

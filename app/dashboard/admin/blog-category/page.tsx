@@ -15,7 +15,6 @@ const BlogCategoryPage = () => {
 
 
   const deleteHandler = async (id: string) => {
-    message.loading('Deleting.....')
     try {
       const res = await deleteBlogCategory(id)
       if (!!res) {

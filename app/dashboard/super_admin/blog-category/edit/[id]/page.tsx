@@ -25,6 +25,7 @@ const EditFaq = ({
   const blogCategory = data
   const [updateFaq, { isLoading }] = useUpdateBlogCategoryMutation()
   const router = useRouter()
+  
   const onSubmit: SubmitHandler<UpdateBlogCategoryFormType> = async (data) => {
     try {
       const response = await updateFaq({ id, ...data }).unwrap()

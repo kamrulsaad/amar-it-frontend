@@ -2,36 +2,22 @@
 
 import ActionBar from "@/components/ui/ActionBar";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
-import { Button, Input, message } from "antd";
-import Link from "next/link";
-import {
-  DeleteOutlined,
-  EditOutlined,
-  ReloadOutlined,
-  EyeOutlined,
-} from "@ant-design/icons";
+import { Button, Input } from "antd";
+import { ReloadOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useDebounced } from "@/redux/hooks";
 import UMTable from "@/components/ui/UMTable";
 import dayjs from "dayjs";
-import UMModal from "@/components/ui/UMModal";
-import {
-  useCustomersQuery,
-  useDeleteCustomerMutation,
-} from "@/redux/api/customerApi";
+import { useCustomersQuery } from "@/redux/api/customerApi";
 
 const CustomerPage = () => {
   const query: Record<string, any> = {};
-  const [deleteAdmin, { isLoading: deleteLoading }] =
-    useDeleteCustomerMutation();
 
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(10);
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [open, setOpen] = useState<boolean>(false);
-  const [adminId, setAdminId] = useState<string>("");
 
   query["limit"] = size;
   query["page"] = page;
@@ -46,8 +32,6 @@ const CustomerPage = () => {
   if (!!debouncedSearchTerm) {
     query["searchTerm"] = debouncedSearchTerm;
   }
-
-  console.log(query)
 
   const { data, isLoading } = useCustomersQuery({ ...query });
 
@@ -76,53 +60,12 @@ const CustomerPage = () => {
       dataIndex: "contactNo",
     },
     {
-      title: "Address",
-      dataIndex: "address",
-    },
-    {
       title: "Created at",
       dataIndex: "createdAt",
       render: function (data: any) {
         return data && dayjs(data).format("MMM D, YYYY hh:mm A");
       },
       sorter: true,
-    },
-    {
-      title: "Action",
-      dataIndex: "id",
-      render: function (data: any) {
-        return (
-          <>
-            <Link href={`/super_admin/details/${data}`}>
-              <Button onClick={() => console.log(data)} type="primary">
-                <EyeOutlined />
-              </Button>
-            </Link>
-            <Link href={`/dashboard/super_admin/manage-customer/edit/${data}`}>
-              <Button
-                style={{
-                  margin: "0px 5px",
-                }}
-                onClick={() => console.log(data)}
-                type="primary"
-              >
-                <EditOutlined />
-              </Button>
-            </Link>
-            <Button
-              type="primary"
-              onClick={() => {
-                setOpen(true);
-                setAdminId(data);
-              }}
-              danger
-              style={{ marginLeft: "3px" }}
-            >
-              <DeleteOutlined />
-            </Button>
-          </>
-        );
-      },
     },
   ];
 
@@ -140,18 +83,6 @@ const CustomerPage = () => {
     setSortBy("");
     setSortOrder("");
     setSearchTerm("");
-  };
-
-  const deleteAdminHandler = async (id: string) => {
-    try {
-      const res = await deleteAdmin(id);
-      if (res) {
-        message.success("Customer Successfully Deleted!");
-        setOpen(false);
-      }
-    } catch (error: any) {
-      message.error(error.message);
-    }
   };
 
   return (
@@ -174,9 +105,6 @@ const CustomerPage = () => {
           }}
         />
         <div>
-          <Link href="/dashboard/super_admin/manage-customer/create">
-            <Button type="primary">Create Customer</Button>
-          </Link>
           {(!!sortBy || !!sortOrder || !!searchTerm) && (
             <Button
               style={{ margin: "0px 5px" }}
@@ -200,16 +128,6 @@ const CustomerPage = () => {
         onTableChange={onTableChange}
         showPagination={true}
       />
-
-      <UMModal
-        title="Remove Customer"
-        isOpen={open}
-        loading={deleteLoading}
-        closeModal={() => setOpen(false)}
-        handleOk={() => deleteAdminHandler(adminId)}
-      >
-        <p className="my-5">Do you want to remove this customer?</p>
-      </UMModal>
     </div>
   );
 };

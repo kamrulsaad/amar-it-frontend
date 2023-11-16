@@ -3,7 +3,7 @@
 import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import UMTable from "@/components/ui/UMTable";
-import { Button, message } from "antd";
+import { Button, Input, Popconfirm, message } from "antd";
 import Link from "next/link";
 import ActionBar from "@/components/ui/ActionBar";
 import dayjs from "dayjs";
@@ -11,16 +11,14 @@ import {
   useDeleteServiceMutation,
   useGetServicesQuery,
 } from "@/redux/api/servicesApi";
-import { getUserInfo } from "@/services/auth.service";
+import { useState } from "react";
+import { ReloadOutlined } from "@ant-design/icons";
+import { useDebounced } from "@/redux/hooks";
 
 const ServicesPage = () => {
-  const [deleteFaq] = useDeleteServiceMutation();
-  const { username } = getUserInfo() as any;
-  const { data, isLoading } = useGetServicesQuery({
-    "customer.username": username,
-  });
+  const query: Record<string, any> = {};
 
-  console.log(data)
+  const [deleteFaq] = useDeleteServiceMutation();
 
   const deleteHandler = async (id: string) => {
     try {
@@ -33,6 +31,47 @@ const ServicesPage = () => {
     }
   };
 
+  const [page, setPage] = useState<number>(1);
+  const [size, setSize] = useState<number>(10);
+  const [sortBy, setSortBy] = useState<string>("");
+  const [sortOrder, setSortOrder] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  query["limit"] = size;
+  query["page"] = page;
+  query["sortBy"] = sortBy;
+  query["sortOrder"] = sortOrder;
+
+  const debouncedTerm = useDebounced({
+    searchQuery: searchTerm,
+    delay: 600,
+  });
+
+  if (!!debouncedTerm) {
+    query["searchTerm"] = debouncedTerm;
+  }
+
+  const { data, isLoading } = useGetServicesQuery({ ...query });
+  const faqData = data?.permissions;
+  const meta = data?.meta;
+
+  const onPaginationChange = (page: number, pageSize: number) => {
+    setPage(page);
+    setSize(pageSize);
+  };
+
+  const onTableChange = (pagination: any, filter: any, sorter: any) => {
+    const { order, field } = sorter;
+    setSortBy(field as string);
+    setSortOrder(order === "ascend" ? "asc" : "desc");
+  };
+
+  const resetFilters = () => {
+    setSortBy("");
+    setSortOrder("");
+    setSearchTerm("");
+  };
+
   const columns = [
     {
       title: "Title",
@@ -41,12 +80,15 @@ const ServicesPage = () => {
     {
       title: "Description",
       dataIndex: "description",
+      render: function (data: string) {
+        return `${data.slice(0, 50)}...`;
+      },
     },
     {
       title: "Charge",
       dataIndex: "charge",
       render: function (data: number) {
-        return `${data} ৳`;
+        return `$${data}`;
       },
       sorter: true,
     },
@@ -87,9 +129,16 @@ const ServicesPage = () => {
                 <EditOutlined />
               </Button>
             </Link>
-            <Button onClick={() => deleteHandler(data)} type="primary" danger>
-              <DeleteOutlined />
-            </Button>
+            <Popconfirm
+              title="Are you sure to delete this service?"
+              onConfirm={() => deleteHandler(data)}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Button type="primary" danger>
+                <DeleteOutlined />
+              </Button>
+            </Popconfirm>
           </>
         );
       },
@@ -107,20 +156,44 @@ const ServicesPage = () => {
         ]}
       />
 
-      <ActionBar title="My Booking List">
+      <ActionBar title="Services List">
+        <Input
+          type="text"
+          size="large"
+          placeholder="Search..."
+          style={{
+            width: "20%",
+          }}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
+        />
         <div>
           <Link href="/dashboard/super_admin/services/create">
             <Button type="primary">Create</Button>
           </Link>
+          {(!!sortBy || !!sortOrder || !!searchTerm) && (
+            <Button
+              onClick={resetFilters}
+              type="primary"
+              style={{ margin: "0px 5px" }}
+            >
+              <ReloadOutlined />
+            </Button>
+          )}
         </div>
       </ActionBar>
 
       <UMTable
         loading={isLoading}
         columns={columns}
-        dataSource={[]}
+        dataSource={faqData}
         showSizeChanger={true}
         showPagination={true}
+        pageSize={size}
+        totalPages={meta?.total}
+        onPaginationChange={onPaginationChange}
+        onTableChange={onTableChange}
       />
     </div>
   );

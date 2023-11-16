@@ -36,6 +36,9 @@ const HomeBannerPage = () => {
       title: "Content",
       dataIndex: "content",
       sorter: true,
+      render: function (data: any) {
+        return data && data.slice(0, 50) + "...";
+      }
     },
     {
       title: "Created at",
@@ -56,7 +59,6 @@ const HomeBannerPage = () => {
                 style={{
                   margin: "0px 5px",
                 }}
-                onClick={() => console.log(data)}
                 type="primary"
               >
                 <EditOutlined />
@@ -67,7 +69,7 @@ const HomeBannerPage = () => {
               description={`This action can not be undone.`}
               onConfirm={() => deleteHandler(data)}
             >
-              <Button danger>
+              <Button type="primary" danger>
                 <DeleteOutlined />
               </Button>
             </Popconfirm>

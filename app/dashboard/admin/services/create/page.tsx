@@ -41,8 +41,8 @@ const CreateServicePage = () => {
     <div>
       <UMBreadCrumb
         items={[
-          { label: `${base}`, link: `/dashboard/${base}` },
-          { label: "faq", link: `/dashboard/${base}/services` },
+          { label: `${base}`, link: `/${base}` },
+          { label: "services", link: `/${base}/services` },
         ]}
       />
       <h1>Create Service</h1>

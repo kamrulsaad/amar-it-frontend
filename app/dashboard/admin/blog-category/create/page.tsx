@@ -7,11 +7,11 @@ import { Button, Col, Row, message } from 'antd'
 import { SubmitHandler } from 'react-hook-form'
 import { useCreateBlogCategoryMutation } from '@/redux/api/blog-category/blogCategory'
 import { CreateBlogCategoryFormType, createBlogCategoryResolver } from '@/schemas/blogCategory'
+
 const CreateBlogCategory = () => {
   const [createBlogCategory, { isLoading }] = useCreateBlogCategoryMutation()
   const router = useRouter()
   const onSubmit: SubmitHandler<CreateBlogCategoryFormType> = async (data) => {
-    message.loading('Creating.....')
     try {
       const response = await createBlogCategory({ ...data }).unwrap()
       if (!!response) {
@@ -39,7 +39,7 @@ const CreateBlogCategory = () => {
           </Col>
         </Row>
         <Button loading={isLoading} type='primary' htmlType='submit'>
-          add
+          Create
         </Button>
       </Form>
     </div>

@@ -1,5 +1,7 @@
 "use client";
 
+import ActionBar from "@/components/ui/ActionBar";
+import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import { useGetServiceQuery } from "@/redux/api/servicesApi";
 import dayjs from "dayjs";
 import { Key } from "react";
@@ -16,18 +18,41 @@ const ServiceDetailsPage = ({ params }: ServiceDetailsPageProps) => {
 
   return (
     <div className="space-y-2">
-      <h2>{data?.title}</h2>
-      <p>Description: {data?.description}</p>
-      <p>Charge: {data?.charge} ৳</p>
+      <UMBreadCrumb
+        items={[
+          {
+            label: "super_admin",
+            link: "/super_admin",
+          },
+          {
+            label: "services",
+            link: "/super_admin/services",
+          },
+        ]}
+      />
+
+      <ActionBar title={data?.title} />
       <p>
-        Status: <span className="uppercase">{data?.status}</span>
+        <b>Description:</b> {data?.description}
       </p>
-      <p>Created At: {dayjs(data?.createdAt).format("MMM D, YYYY hh:mm A")}</p>
-      <p>Features: </p>
+      <p>
+        {" "}
+        <b>Charge:</b> {data?.charge} ৳
+      </p>
+      <p>
+        <b>Status:</b> <span className="uppercase">{data?.status}</span>
+      </p>
+      <p>
+        <b>Created At:</b>{" "}
+        {dayjs(data?.createdAt).format("MMM D, YYYY hh:mm A")}
+      </p>
+      <p className="font-bold">Features: </p>
       <ul className="ml-8">
         {data?.features.map(
           (feature: string, index: Key | null | undefined) => (
-            <li key={index}>{feature}</li>
+            <li key={index}>
+              <p>{feature}</p>
+            </li>
           )
         )}
       </ul>
