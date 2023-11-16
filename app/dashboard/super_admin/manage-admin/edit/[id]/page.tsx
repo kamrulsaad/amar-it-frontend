@@ -34,11 +34,31 @@ const EditAdmin = ({ params }: EditAdminProps) => {
   };
 
   const { data } = useGetPermissionsQuery({ limit: 100, page: 1 });
+  //@ts-ignore
+  const departments: IPermission[] = data?.permissions;
+
+  const departmentOptions =
+    departments &&
+    departments?.map((department) => {
+      return {
+        label: department?.title,
+        value: department?.id,
+      };
+    });
+
   const [updateAdmin, { isLoading }] = useUpdateAdminMutation();
 
   const onSubmit = async (values: any) => {
+    const obj = { ...values };
+    const file = obj["file"];
+    delete obj["file"];
+    const data = JSON.stringify(obj);
+    const formData = new FormData();
+    formData.append("file", file as Blob);
+    formData.append("data", data);
+
     try {
-      const res = await updateAdmin({ id, body: values }).unwrap();
+      const res = await updateAdmin({ id, body: formData }).unwrap();
       if (!!res) {
         message.success("Admin updated successfully!");
         router.push("/dashboard/super_admin/manage-admin");
@@ -162,7 +182,31 @@ const EditAdmin = ({ params }: EditAdminProps) => {
                   marginBottom: "10px",
                 }}
               >
+                <FormSelectField
+                  size="large"
+                  name="permissionId"
+                  options={departmentOptions}
+                  label="Department"
+                  placeholder="Select"
+                />
+              </Col>
+              <Col
+                className="gutter-row"
+                span={8}
+                style={{
+                  marginBottom: "10px",
+                }}
+              >
                 <FormTextArea name="address" rows={2} label="Address" />
+              </Col>
+              <Col
+                className="gutter-row"
+                span={8}
+                style={{
+                  marginBottom: "10px",
+                }}
+              >
+                <UploadImage name="file" />
               </Col>
             </Row>
           </div>

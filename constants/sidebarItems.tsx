@@ -107,17 +107,17 @@ export const sidebarItems = (role: string) => {
       children: [
         {
           label: (
+            <Link href={`/dashboard/${role}/manage-admin`}>Manage Admin</Link>
+          ),
+          key: `/${role}/manage-admin`,
+        },
+        {
+          label: (
             <Link href={`/dashboard/${role}/permission`}>
               Admin Permissions
             </Link>
           ),
           key: `/${role}/department`,
-        },
-        {
-          label: (
-            <Link href={`/dashboard/${role}/manage-admin`}>Manage Admin</Link>
-          ),
-          key: `/${role}/manage-admin`,
         },
       ],
     },

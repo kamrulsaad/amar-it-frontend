@@ -16,6 +16,7 @@ import {
   useDeletePermissionMutation,
   useGetPermissionsQuery,
 } from "@/redux/api/permissionApi";
+import dayjs from "dayjs";
 
 const PermissionsPage = () => {
   const query: Record<string, any> = {};
@@ -62,6 +63,14 @@ const PermissionsPage = () => {
     {
       title: "Title",
       dataIndex: "title",
+    },
+    {
+      title: "Created At",
+      dataIndex: "createdAt",
+      render: function (data: any) {
+        return dayjs(data).format("DD/MM/YYYY HH:mm A");
+      },
+      sorter: true,
     },
     {
       title: "Action",

@@ -40,11 +40,6 @@ const BookingPage = () => {
     setSortOrder(order === "ascend" ? "asc" : "desc");
   };
 
-  const resetFilters = () => {
-    setSortBy("");
-    setSortOrder("");
-  };
-
   useEffect(() => {
     getUserInfo();
   }, []);
