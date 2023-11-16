@@ -7,7 +7,7 @@ import Meta from "antd/es/card/Meta";
 const BlogCard = ({ blog }: { blog: IBlog }) => {
   return (
     <Card
-      style={{ width: 300 }}
+      style={{ width: "100%", marginBottom: "20px" }}
       cover={
         <Image
           src={blog.image}
@@ -17,8 +17,9 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
           style={{
             maxWidth: "100%",
             height: "auto",
-            objectFit: "cover"
-          }} />
+            objectFit: "cover",
+          }}
+        />
       }
       actions={[
         <Link href={`/blogs/${blog.id}`} key={"1"}>
@@ -28,7 +29,7 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
     >
       <Meta
         title={blog.title}
-        description={blog.content.slice(0, 100) + "..."}
+        description={blog.content.slice(0, 80) + "..."}
       />
     </Card>
   );
