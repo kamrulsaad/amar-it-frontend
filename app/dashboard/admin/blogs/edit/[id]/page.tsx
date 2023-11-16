@@ -46,7 +46,7 @@ const EditFaq = ({
     try {
       const res = await updateBlog({ id, body: formData }).unwrap();
       if (!!res) {
-        router.push("/dashboard/super_admin/blogs");
+        router.push("/dashboard/admin/blogs");
         message.success("Blog Updated Successfully");
       }
     } catch (err: any) {
@@ -60,7 +60,7 @@ const EditFaq = ({
     content: data?.content || "",
   };
 
-  const base = "super_admin";
+  const base = "admin";
 
   return (
     <div>

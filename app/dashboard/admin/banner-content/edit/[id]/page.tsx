@@ -35,7 +35,7 @@ const EditHomeBanner = ({
     try {
       const response = await updateHomeBanner({ id, body: formData }).unwrap()
       if (!!response) {
-        router.push('/dashboard/super_admin/banner-content')
+        router.push('/dashboard/admin/banner-content')
         message.success('HomeBanner Updated Successfully')
       }
     } catch (err: any) {
@@ -49,7 +49,7 @@ const EditHomeBanner = ({
     content: homebanner?.content || '',
     image: homebanner?.image || '',
   }
-  const base = 'super_admin'
+  const base = 'admin'
   return (
     <div>
       <UMBreadCrumb

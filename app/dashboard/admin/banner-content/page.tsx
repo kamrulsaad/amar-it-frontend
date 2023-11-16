@@ -54,7 +54,7 @@ const HomeBannerPage = () => {
       render: function (data: any) {
         return (
           <>
-            <Link href={`/dashboard/super_admin/banner-content/edit/${data}`}>
+            <Link href={`/dashboard/admin/banner-content/edit/${data}`}>
               <Button
                 style={{
                   margin: "0px 5px",
@@ -84,15 +84,15 @@ const HomeBannerPage = () => {
       <UMBreadCrumb
         items={[
           {
-            label: "super_admin",
-            link: "/dashboard/super_admin",
+            label: "admin",
+            link: "/dashboard/admin",
           },
         ]}
       />
 
       <ActionBar title="Home Banner List">
         <div>
-          <Link href="/dashboard/super_admin/banner-content/create">
+          <Link href="/dashboard/admin/banner-content/create">
             <Button type="primary">Create</Button>
           </Link>
         </div>

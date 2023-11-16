@@ -83,7 +83,7 @@ const BlogPage = () => {
       render: function (data: any) {
         return (
           <>
-            <Link href={`/dashboard/super_admin/blogs/edit/${data}`}>
+            <Link href={`/dashboard/admin/blogs/edit/${data}`}>
               <Button
                 style={{
                   margin: "0px 5px",
@@ -131,8 +131,8 @@ const BlogPage = () => {
       <UMBreadCrumb
         items={[
           {
-            label: "super_admin",
-            link: "/dashboard/super_admin",
+            label: "admin",
+            link: "/dashboard/admin",
           },
         ]}
       />
@@ -150,7 +150,7 @@ const BlogPage = () => {
           }}
         />
         <div>
-          <Link href="/dashboard/super_admin/blogs/create">
+          <Link href="/dashboard/admin/blogs/create">
             <Button type="primary">Create</Button>
           </Link>
           {(!!sortBy || !!sortOrder || !!searchTerm) && (

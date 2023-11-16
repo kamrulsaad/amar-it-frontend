@@ -17,14 +17,14 @@ const CreateDepartmentPage = () => {
     try {
       const response = await creatFaq({ ...data }).unwrap()
       if (!!response) {
-        router.push('/dashboard/super_admin/faq')
+        router.push('/dashboard/admin/faq')
         message.success('Faq Created Successfully')
       }
     } catch (error) {
       console.error(error)
     }
   }
-  const base = 'super_admin'
+  const base = 'admin'
   return (
     <div>
       <UMBreadCrumb

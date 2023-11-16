@@ -24,7 +24,7 @@ const CreateBlogContentPage = () => {
     try {
       const res = await addAdminWithFormData(formData).unwrap()
       if (!!res) {
-        router.push('/dashboard/super_admin/banner-content')
+        router.push('/dashboard/admin/banner-content')
         message.success('Home Banner created successfully!')
       }
     } catch (err: any) {
@@ -39,12 +39,12 @@ const CreateBlogContentPage = () => {
       <UMBreadCrumb
         items={[
           {
-            label: 'super_admin',
-            link: '/super_admin',
+            label: 'admin',
+            link: '/admin',
           },
           {
             label: 'banner-content',
-            link: '/super_admin/banner-content',
+            link: '/admin/banner-content',
           },
         ]}
       />

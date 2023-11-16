@@ -23,7 +23,7 @@ const EditFaq = ({
       const response = await updateFaq({ id, ...data }).unwrap();
 
       if (!!response) {
-        router.push("/dashboard/super_admin/faq");
+        router.push("/dashboard/admin/faq");
         message.success("Faq Updated Successfully");
       }
     } catch (error) {
@@ -34,7 +34,7 @@ const EditFaq = ({
     question: faq?.question || "",
     answer: faq?.answer || "",
   };
-  const base = "super_admin";
+  const base = "admin";
   return (
     <div>
       <UMBreadCrumb

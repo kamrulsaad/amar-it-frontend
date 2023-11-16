@@ -6,7 +6,6 @@ import FormTextArea from "@/components/Forms/FormTextArea";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import UploadImage from "@/components/ui/UploadImage";
 import { useAdminsQuery, useUpdateAdminMutation } from "@/redux/api/adminApi";
-import { useUpdateCustomerMutation } from "@/redux/api/customerApi";
 import { getUserInfo } from "@/services/auth.service";
 
 import { Button, Col, Row, message } from "antd";
@@ -56,7 +55,7 @@ const EditSuperAdmin = () => {
         body: formData,
       }).unwrap();
       if (!!response) {
-        router.push("/dashboard/super_admin/");
+        router.push("/dashboard/admin/");
         message.success("Profile updated successfully!");
       }
     } catch (err: any) {
@@ -72,7 +71,7 @@ const EditSuperAdmin = () => {
         items={[
           {
             label: "profile",
-            link: "/super_admin",
+            link: "/admin",
           },
         ]}
       />
@@ -94,7 +93,7 @@ const EditSuperAdmin = () => {
                 marginBottom: "10px",
               }}
             >
-              Customer Information
+              Admin Information
             </p>
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
               <Col

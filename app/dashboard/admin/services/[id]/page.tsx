@@ -21,12 +21,12 @@ const ServiceDetailsPage = ({ params }: ServiceDetailsPageProps) => {
       <UMBreadCrumb
         items={[
           {
-            label: "super_admin",
-            link: "/super_admin",
+            label: "admin",
+            link: "/admin",
           },
           {
             label: "services",
-            link: "/super_admin/services",
+            link: "/admin/services",
           },
         ]}
       />

@@ -94,7 +94,7 @@ const EditSuperAdmin = () => {
                 marginBottom: "10px",
               }}
             >
-              Customer Information
+              Admin Information
             </p>
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
               <Col

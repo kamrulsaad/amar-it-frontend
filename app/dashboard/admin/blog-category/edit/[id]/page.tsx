@@ -31,7 +31,7 @@ const EditFaq = ({
       const response = await updateFaq({ id, ...data }).unwrap()
 
       if (!!response) {
-        router.push('/dashboard/super_admin/blog-category')
+        router.push('/dashboard/admin/blog-category')
         message.success('Blog category Updated Successfully')
       }
     } catch (error: any) {
@@ -41,7 +41,7 @@ const EditFaq = ({
   const defaultValues = {
     title: blogCategory?.title,
   }
-  const base = 'super_admin'
+  const base = 'admin'
   return (
     <div>
       <UMBreadCrumb

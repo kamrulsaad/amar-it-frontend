@@ -39,7 +39,7 @@ const CreateBlogCategory = () => {
     try {
       const res = await createBlog(formData).unwrap()
       if (!!res) {
-        router.push('/dashboard/super_admin/blogs')
+        router.push('/dashboard/admin/blogs')
         message.success('Blog Created Successfully')
       }
     } catch (err: any) {
@@ -49,7 +49,7 @@ const CreateBlogCategory = () => {
     }
   }
 
-  const base = 'super_admin'
+  const base = 'admin'
   return (
     <div>
       <UMBreadCrumb

@@ -49,7 +49,7 @@ const FAQpage = () => {
       render: function (data: any) {
         return (
           <>
-            <Link href={`/dashboard/super_admin/faq/edit/${data}`}>
+            <Link href={`/dashboard/admin/faq/edit/${data}`}>
               <Button
                 style={{
                   margin: "0px 5px",
@@ -81,15 +81,15 @@ const FAQpage = () => {
       <UMBreadCrumb
         items={[
           {
-            label: "super_admin",
-            link: "/dashboard/super_admin",
+            label: "admin",
+            link: "/dashboard/admin",
           },
         ]}
       />
 
       <ActionBar title="Faq List">
         <div>
-          <Link href="/dashboard/super_admin/faq/create">
+          <Link href="/dashboard/admin/faq/create">
             <Button type="primary">Create</Button>
           </Link>
         </div>

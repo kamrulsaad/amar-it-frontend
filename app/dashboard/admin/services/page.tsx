@@ -114,12 +114,12 @@ const ServicesPage = () => {
       render: function (data: any) {
         return (
           <>
-            <Link href={`/dashboard/super_admin/services/${data}`}>
+            <Link href={`/dashboard/admin/services/${data}`}>
               <Button type="dashed">
                 <EyeOutlined />
               </Button>
             </Link>
-            <Link href={`/dashboard/super_admin/services/edit/${data}`}>
+            <Link href={`/dashboard/admin/services/edit/${data}`}>
               <Button
                 style={{
                   margin: "0px 5px",
@@ -150,8 +150,8 @@ const ServicesPage = () => {
       <UMBreadCrumb
         items={[
           {
-            label: "super_admin",
-            link: "/super_admin",
+            label: "admin",
+            link: "/admin",
           },
         ]}
       />
@@ -169,7 +169,7 @@ const ServicesPage = () => {
           }}
         />
         <div>
-          <Link href="/dashboard/super_admin/services/create">
+          <Link href="/dashboard/admin/services/create">
             <Button type="primary">Create</Button>
           </Link>
           {(!!sortBy || !!sortOrder || !!searchTerm) && (

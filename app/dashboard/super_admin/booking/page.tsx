@@ -189,13 +189,13 @@ const BookingPage = () => {
       <UMBreadCrumb
         items={[
           {
-            label: "customer",
-            link: "/customer",
+            label: "super_admin",
+            link: "/super_admin",
           },
         ]}
       />
 
-      <ActionBar title="My Bookings" />
+      <ActionBar title="Bookings" />
 
       <UMTable
         loading={isLoading}

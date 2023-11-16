@@ -44,7 +44,7 @@ const BlogCategoryPage = () => {
       render: function (data: any) {
         return (
           <>
-            <Link href={`/dashboard/super_admin/blog-category/edit/${data}`}>
+            <Link href={`/dashboard/admin/blog-category/edit/${data}`}>
               <Button
                 style={{
                   margin: '0px 5px',
@@ -69,15 +69,15 @@ const BlogCategoryPage = () => {
       <UMBreadCrumb
         items={[
           {
-            label: 'super_admin',
-            link: '/dashboard/super_admin',
+            label: 'admin',
+            link: '/dashboard/admin',
           },
         ]}
       />
 
       <ActionBar title='Blog Category List'>
         <div>
-          <Link href='/dashboard/super_admin/blog-category/create'>
+          <Link href='/dashboard/admin/blog-category/create'>
             <Button type='primary'>Create</Button>
           </Link>
         </div>

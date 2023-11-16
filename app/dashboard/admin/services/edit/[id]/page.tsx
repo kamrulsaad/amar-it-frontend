@@ -36,7 +36,7 @@ const EditServicePage = ({ params }: EditServicePageProps) => {
       data.charge = Number(data.charge);
       const response = await updateService({ id, ...data }).unwrap();
       if (!!response) {
-        router.push("/dashboard/super_admin/services");
+        router.push("/dashboard/admin/services");
         message.success("Service Updated Successfully");
       }
     } catch (error: any) {
@@ -46,7 +46,7 @@ const EditServicePage = ({ params }: EditServicePageProps) => {
     }
   };
 
-  const base = "super_admin";
+  const base = "admin";
 
   const statusOptions = [
     { label: "Active", value: "active" },

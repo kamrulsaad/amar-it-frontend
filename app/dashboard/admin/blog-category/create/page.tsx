@@ -15,14 +15,14 @@ const CreateBlogCategory = () => {
     try {
       const response = await createBlogCategory({ ...data }).unwrap()
       if (!!response) {
-        router.push('/dashboard/super_admin/blog-category')
+        router.push('/dashboard/admin/blog-category')
         message.success('Blogcategory Created Successfully')
       }
     } catch (err: any) {
       message.error(err.message)
     }
   }
-  const base = 'super_admin'
+  const base = 'admin'
   return (
     <div>
       <UMBreadCrumb

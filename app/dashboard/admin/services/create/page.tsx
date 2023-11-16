@@ -25,7 +25,7 @@ const CreateServicePage = () => {
 
       const response = await createService({ ...data }).unwrap();
       if (!!response) {
-        router.push("/dashboard/super_admin/services");
+        router.push("/dashboard/admin/services");
         message.success("Service Created Successfully");
       }
     } catch (error: any) {
@@ -35,7 +35,7 @@ const CreateServicePage = () => {
     }
   };
 
-  const base = "super_admin";
+  const base = "admin";
 
   return (
     <div>
