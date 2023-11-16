@@ -38,7 +38,7 @@ const HowItWorks = () => {
             title="Project Demo"
             width="100%"
             height="350"
-            src="https://www.youtube.com/embed/8f8_JYIzOno?list=PLiUrl-SQRR7LQINGQGE99pXWDuKq4SxfU"
+            src="https://www.youtube-nocookie.com/embed/Tn6-PIqc4UM?si=7_DkHmgVTxge9nyC"
           ></iframe>
         </Modal>
       </div>
