@@ -3,6 +3,9 @@
 import { useAdminQuery } from "@/redux/api/adminApi";
 import { Button } from "antd";
 import { EditOutlined } from "@ant-design/icons";
+import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
+import Image from "next/image";
+import Link from "next/link";
 
 interface AdminDetailsPageProps {
   params: {
@@ -11,25 +14,42 @@ interface AdminDetailsPageProps {
 }
 
 const AdminDetailsPage = ({ params: { id } }: AdminDetailsPageProps) => {
-  const { data: admin } = useAdminQuery(id);
+  const { data: customer } = useAdminQuery(id);
 
   return (
     <div>
-      <h1 className="mb-2">Super Admin Profile</h1>
-      <div className="space-y-2 my-2">
-        <p>
-          Name:
-          {admin?.firstName} {admin?.middleName && admin?.middleName + " "}{" "}
-          {admin?.lastName}
-        </p>
-        <p>Username: {admin?.username}</p>
-        <p>Phone: {admin?.contactNo}</p>
-        <p>Email: {admin?.email}</p>
-        <p>Address: {admin?.address}</p>
+      <UMBreadCrumb items={[]} />
+      <h1 className="mb-2">Admin Profile</h1>
+
+      <div className="flex justify-between items-center">
+        <div className="space-y-2 my-2">
+          <p>
+            Name:
+            {customer?.firstName}{" "}
+            {customer?.middleName && customer?.middleName + " "}{" "}
+            {customer?.lastName}
+          </p>
+          <p>Username: {customer?.username}</p>
+          <p>Phone: {customer?.contactNo}</p>
+          <p>Email: {customer?.email}</p>
+          <p>Address: {customer?.address}</p>
+          <p>Department: {customer?.permission?.title} </p>
+        </div>
+        {customer?.profileImage && (
+          <Image
+            className="rounded-full mr-4"
+            src={customer?.profileImage}
+            alt="customer image"
+            width={200}
+            height={200}
+          />
+        )}
       </div>
-      <Button type="primary" size="large">
-        <EditOutlined /> Edit
-      </Button>
+      <Link href={"/dashboard/super_admin/manage-admin/edit/" + customer?.id}>
+        <Button type="primary" size="middle">
+          <EditOutlined /> Edit Admin Info
+        </Button>
+      </Link>
     </div>
   );
 };

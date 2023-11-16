@@ -40,7 +40,6 @@ export const bookingApi = baseApi.injectEndpoints({
         url: `${BOOKING_URL}/${data.id}`,
         method: "PATCH",
         data: data.body,
-        contentType: "multipart/form-data",
       }),
       invalidatesTags: [TagTypes.booking],
     }),

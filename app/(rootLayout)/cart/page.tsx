@@ -58,25 +58,6 @@ const CartPage = () => {
       if (booking?.id) {
         message.success("Booking successful");
         setBookingCompleted(() => true);
-      }
-    } catch (error: any) {
-      for (const err of error.data.errorMessages) {
-        message.error(err.message);
-      }
-    }
-  };
-
-  const successPaymentHandlerStripe = async (token: any) => {
-    try {
-      const body = {
-        stripeToken: token,
-        totalPrice: service.charge,
-      };
-
-      const result = await makePayment(body).unwrap();
-
-      if (result?.success) {
-        message.success("Payment successful");
         router.push("/dashboard/customer/booking");
       }
     } catch (error: any) {
@@ -85,6 +66,26 @@ const CartPage = () => {
       }
     }
   };
+
+  // const successPaymentHandlerStripe = async (token: any) => {
+  //   try {
+  //     const body = {
+  //       stripeToken: token,
+  //       totalPrice: service.charge,
+  //     };
+
+  //     const result = await makePayment(body).unwrap();
+
+  //     if (result?.success) {
+  //       message.success("Payment successful");
+  //       router.push("/dashboard/customer/booking");
+  //     }
+  //   } catch (error: any) {
+  //     for (const err of error.data.errorMessages) {
+  //       message.error(err.message);
+  //     }
+  //   }
+  // };
 
   return (
     <div className="bgGray ">
@@ -133,26 +134,26 @@ const CartPage = () => {
                   />
                 </Col>
               </Row>
-              {bookingCompleted ? (
-                <StripeCheckout
-                  stripeKey={
-                    "pk_test_51OCpX2EoZ8jVom2APwgYRYV4A56vBZO5AcHbKYf2vlfalZpxDk4L4HW7DXu3BbmALQCHCBepiDwmBA9EZZcIOwhb00VGaaSOOY"
-                  }
-                  amount={service.charge * 100}
-                  shippingAddress
-                  token={successPaymentHandlerStripe}
-                  currency="USD"
-                />
-              ) : (
-                <Button
-                  style={{ margin: "10px 0" }}
-                  loading={isLoading}
-                  type="primary"
-                  htmlType="submit"
-                >
-                  Confirm Booking
-                </Button>
-              )}
+              {/* {bookingCompleted ? (
+                // <StripeCheckout
+                //   stripeKey={
+                //     "pk_test_51OCpX2EoZ8jVom2APwgYRYV4A56vBZO5AcHbKYf2vlfalZpxDk4L4HW7DXu3BbmALQCHCBepiDwmBA9EZZcIOwhb00VGaaSOOY"
+                //   }
+                //   amount={service.charge * 100}
+                //   shippingAddress
+                //   token={successPaymentHandlerStripe}
+                //   currency="USD"
+                // />
+              ) : ( */}
+              <Button
+                style={{ margin: "10px 0" }}
+                loading={isLoading}
+                type="primary"
+                htmlType="submit"
+              >
+                Confirm Booking
+              </Button>
+              {/* )} */}
             </Form>
           </div>
         </div>

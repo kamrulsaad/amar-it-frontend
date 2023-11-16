@@ -10,12 +10,12 @@ import { USER_ROLE } from "./role";
 export const sidebarItems = (role: string) => {
   const defaultSidebarItems: MenuProps["items"] = [
     {
-      label: "Profile",
+      label: `${role.toUpperCase()} Dashboard`,
       key: "profile",
       icon: <ProfileOutlined />,
       children: [
         {
-          label: <Link href={`/dashboard/${role}`}>Account Profile</Link>,
+          label: <Link href={`/dashboard/${role}`}>My Profile</Link>,
           key: `/${role}/profile`,
         },
         {
@@ -38,7 +38,9 @@ export const sidebarItems = (role: string) => {
     },
     {
       label: (
-        <Link href={`/dashboard/${role}/manage-customer`}>Manage Customer</Link>
+        <Link href={`/dashboard/${role}/manage-customer`}>
+          Manage Customers
+        </Link>
       ),
       icon: <TableOutlined />,
       key: `/${role}/manage-customer`,
@@ -54,8 +56,8 @@ export const sidebarItems = (role: string) => {
       icon: <AppstoreOutlined />,
     },
     {
-      label: <Link href={`/dashboard/${role}/packages`}>Packages</Link>,
-      key: "packages",
+      label: <Link href={`/dashboard/${role}/tickets`}>Ticket</Link>,
+      key: "tickets",
       icon: <AppstoreOutlined />,
     },
     {
@@ -97,11 +99,7 @@ export const sidebarItems = (role: string) => {
   const superAdminSidebarItems: MenuProps["items"] = [
     ...defaultSidebarItems,
     ...commonAdminSidebarItems,
-    {
-      label: <Link href={`/dashboard/${role}/manage-admin`}>Manage Admin</Link>,
-      icon: <TableOutlined />,
-      key: `/${role}/manage-admin`,
-    },
+
     {
       label: "Management",
       key: "management",
@@ -115,6 +113,12 @@ export const sidebarItems = (role: string) => {
           ),
           key: `/${role}/department`,
         },
+        {
+          label: (
+            <Link href={`/dashboard/${role}/manage-admin`}>Manage Admin</Link>
+          ),
+          key: `/${role}/manage-admin`,
+        },
       ],
     },
   ];
@@ -127,11 +131,9 @@ export const sidebarItems = (role: string) => {
       key: `/${role}/booking`,
     },
     {
-      label: (
-        <Link href={`/dashboard/${role}/notifications`}>Notifications</Link>
-      ),
+      label: <Link href={`/dashboard/${role}/ticket`}>Support Ticket</Link>,
       icon: <TableOutlined />,
-      key: `/${role}/notifications`,
+      key: `/${role}/ticket`,
     },
   ];
 

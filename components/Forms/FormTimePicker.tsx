@@ -1,14 +1,17 @@
 import { TimePicker } from "antd";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 
 type FormTimePickerProps = {
   name: string;
   label?: string;
   index?: number;
 };
-export default function FormTimePicker({ name, label }: FormTimePickerProps) {
+export default function FormTimePicker({
+  name,
+  label,
+}: FormTimePickerProps) {
   const { control, setValue } = useFormContext();
   return (
     <>

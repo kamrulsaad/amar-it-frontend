@@ -22,6 +22,7 @@ const Login = () => {
       const response = await userLogin({ ...data }).unwrap();
       if (response?.accessToken) {
         router.push(`/dashboard`);
+        storeUserInfo({ accessToken: response.accessToken });
         message.success("Login Successful");
       }
     } catch (error: any) {
@@ -45,8 +46,9 @@ const Login = () => {
           width={500}
           style={{
             maxWidth: "100%",
-            height: "auto"
-          }} />
+            height: "auto",
+          }}
+        />
       </Col>
       <Col sm={12} md={8} lg={8}>
         <h1

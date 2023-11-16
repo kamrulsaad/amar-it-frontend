@@ -5,12 +5,6 @@ import { getUserInfo } from '@/services/auth.service'
 const user = getUserInfo() as any
 export const store = configureStore({
   reducer,
-  preloadedState: {
-    auth: {
-      username: user.username,
-      role: user.role,
-    },
-  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(baseApi.middleware),
 })
