@@ -7,8 +7,8 @@ import FormTimePicker from "@/components/Forms/FormTimePicker";
 import { useCreateBookingMutation } from "@/redux/api/bookingApi";
 import { useAppSelector } from "@/redux/hooks";
 import { getUserInfo } from "@/services/auth.service";
-import { IBooking, IGenericErrorResponse } from "@/types";
-import { Button, Col, Divider, Row, message } from "antd";
+import { IBooking } from "@/types";
+import { Button, Col, Row, message } from "antd";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import StripeCheckout from "react-stripe-checkout";
@@ -58,7 +58,7 @@ const CartPage = () => {
       if (booking?.id) {
         message.success("Booking successful");
         setBookingCompleted(() => true);
-        router.push("/dashboard/customer/booking");
+        // router.push("/dashboard/customer/booking");
       }
     } catch (error: any) {
       for (const err of error.data.errorMessages) {
@@ -67,25 +67,25 @@ const CartPage = () => {
     }
   };
 
-  // const successPaymentHandlerStripe = async (token: any) => {
-  //   try {
-  //     const body = {
-  //       stripeToken: token,
-  //       totalPrice: service.charge,
-  //     };
+  const successPaymentHandlerStripe = async (token: any) => {
+    try {
+      const body = {
+        stripeToken: token,
+        totalPrice: service.charge,
+      };
 
-  //     const result = await makePayment(body).unwrap();
+      const result = await makePayment(body).unwrap();
 
-  //     if (result?.success) {
-  //       message.success("Payment successful");
-  //       router.push("/dashboard/customer/booking");
-  //     }
-  //   } catch (error: any) {
-  //     for (const err of error.data.errorMessages) {
-  //       message.error(err.message);
-  //     }
-  //   }
-  // };
+      if (!!result) {
+        message.success("Payment successful");
+        router.push("/dashboard/customer/booking");
+      }
+    } catch (error: any) {
+      for (const err of error.data.errorMessages) {
+        message.error(err.message);
+      }
+    }
+  };
 
   return (
     <div className="bgGray ">
@@ -134,26 +134,26 @@ const CartPage = () => {
                   />
                 </Col>
               </Row>
-              {/* {bookingCompleted ? (
-                // <StripeCheckout
-                //   stripeKey={
-                //     "pk_test_51OCpX2EoZ8jVom2APwgYRYV4A56vBZO5AcHbKYf2vlfalZpxDk4L4HW7DXu3BbmALQCHCBepiDwmBA9EZZcIOwhb00VGaaSOOY"
-                //   }
-                //   amount={service.charge * 100}
-                //   shippingAddress
-                //   token={successPaymentHandlerStripe}
-                //   currency="USD"
-                // />
-              ) : ( */}
-              <Button
-                style={{ margin: "10px 0" }}
-                loading={isLoading}
-                type="primary"
-                htmlType="submit"
-              >
-                Confirm Booking
-              </Button>
-              {/* )} */}
+              {bookingCompleted ? (
+                <StripeCheckout
+                  stripeKey={
+                    "pk_test_51OCpX2EoZ8jVom2APwgYRYV4A56vBZO5AcHbKYf2vlfalZpxDk4L4HW7DXu3BbmALQCHCBepiDwmBA9EZZcIOwhb00VGaaSOOY"
+                  }
+                  amount={service.charge * 100}
+                  shippingAddress
+                  token={successPaymentHandlerStripe}
+                  currency="USD"
+                />
+              ) : (
+                <Button
+                  style={{ margin: "10px 0" }}
+                  loading={isLoading}
+                  type="primary"
+                  htmlType="submit"
+                >
+                  Confirm Booking
+                </Button>
+              )}
             </Form>
           </div>
         </div>
