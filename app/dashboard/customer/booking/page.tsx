@@ -128,7 +128,7 @@ const BookingPage = () => {
                   style={{
                     marginRight: "5px",
                   }}
-                  disabled={data?.status === "cancelled"}
+                  disabled={data?.status === "cancelled" || data?.status === "completed"}
                   type="primary"
                 >
                   <EditOutlined />
@@ -140,7 +140,7 @@ const BookingPage = () => {
               onConfirm={() => deleteHandler(data?.id)}
             >
               <Button
-                disabled={data?.status === "cancelled"}
+                disabled={data?.status === "cancelled" || data?.status === "completed"}
                 type="primary"
                 danger
               >
