@@ -9,11 +9,11 @@ A modern full-stack web application based on `Nextjs 13.5.5` and `TypeScript` wi
 ## Table of Contents
 
 - [Overview](#overview)
-- [Links](#links) <!-- - [How to run](#how-to-run) -->
+- [Links](#links) 
 - [Screenshot](#preview)
 - [Features](#features)
 - [Future Improvements](#future-improvements)
-- [Built with](#built-with) 
+- [Built with](#built-with)
 
 ---
 
@@ -23,6 +23,18 @@ A modern full-stack web application based on `Nextjs 13.5.5` and `TypeScript` wi
 - Backend Live Site Link: [Click Here](https://amar-it-frontend.vercel.app/) to see the Live backend website.
 - Fronted Github Repo: [Click Here](https://github.com/kamrulsaad/amar-it-frontend) to check the frontend github repo for this project.
 - Backend Github Repo: [Click Here](https://github.com/kamrulsaad/amar-it-backend) to check the backend github repo for this project.
+
+## Demo Credentials
+
+- Super Admin:
+  - Username: `super_admin`
+  - Password: `123456`
+- Admin:
+  - Username: `admin123`
+  - Password: `123456`
+- Customer:
+  - Username: `customer1`
+  - Password: `123456`
 
 ## Preview
 
