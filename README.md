@@ -13,7 +13,7 @@ A modern full-stack web application based on `Nextjs 13.5.5` and `TypeScript` wi
 - [Screenshot](#preview)
 - [Features](#features)
 - [Future Improvements](#future-improvements)
-- [Built with](#built-with)
+- [Built with](#built-with) 
 
 ---
 
