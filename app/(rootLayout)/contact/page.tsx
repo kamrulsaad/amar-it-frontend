@@ -1,85 +1,112 @@
 "use client";
-
-import { Form, Input, Button, Checkbox } from "antd";
-const { TextArea } = Input;
+import Form from '@/components/Forms/Form'
+import FormInput from "@/components/Forms/FormInput";
+import { useCreateContactMutation } from "@/redux/api/contactApi";
+import { CreateContactFormType, createContactResolver } from "@/schemas/contact";
+import { Button, Checkbox, message } from "antd";
+import { SubmitHandler } from "react-hook-form";
+// const { TextArea } = Input;
 
 const ContactPage = () => {
+  const [createContact, { isLoading }] = useCreateContactMutation()
+
+
+  const onSubmit: SubmitHandler<CreateContactFormType> = async (data) => {
+    try {
+      const res = await createContact({ ...data }).unwrap()
+      if (!!res) {
+        message.success('Email sent successfully')
+      }
+      
+    } catch (error: any) {
+      message.error(error?.data?.message || 'Something went wrong')
+    }
+  }
   return (
-    <div id="contact" className="block contactBlock">
-      <div className="container-fluid">
-        <div className="titleHolder">
+    <div id='contact' className='block contactBlock'>
+      <div className='container-fluid'>
+        <div className='titleHolder'>
           <h2>Get in Touch</h2>
         </div>
         <Form
-          name="normal_login"
-          className="login-form"
-          initialValues={{ remember: true }}
+          onSubmit={onSubmit}
+          resolver={createContactResolver}
+          // name='normal_login'
+          // className='login-form'
+          // initialValues={{ remember: true }}
         >
-          <Form.Item
-            name="fullname"
-            rules={[
-              {
-                required: true,
-                message: "Please enter your full name!",
-              },
-            ]}
-          >
-            <Input size="large" placeholder="Full Name" />
-          </Form.Item>
-          <Form.Item
-            name="email"
-            rules={[
-              {
-                type: "email",
-                message: "The input is not valid E-mail!",
-              },
-              {
-                required: true,
-                message: "Please input your E-mail!",
-              },
-            ]}
-          >
-            <Input size="large" placeholder="Email Address" />
-          </Form.Item>
-          <Form.Item name="telephone">
-            <Input size="large" placeholder="Telephone" />
-          </Form.Item>
-          <Form.Item name="subject">
-            <Input size="large" placeholder="Subject" />
-          </Form.Item>
-          <Form.Item name="message">
-            <TextArea size="large" placeholder="Message" />
-          </Form.Item>
-          <Form.Item>
+          <div>
+            <FormInput type='text' size='large' name='name' label='Name' />
+          </div>
+          <div>
+            <FormInput type='email' size='large' name='email' label='Email' />
+          </div>
+          <div>
+            <FormInput type='text' size='large' name='phone' label='Phone' />
+          </div>
+          <div>
+            <FormInput
+              type='text'
+              size='large'
+              name='subject'
+              label='Subject'
+            />
+          </div>
+          {/* <Form.Item name='message'>
+            <TextArea name='message' size='large' placeholder='Message' />
+          </Form.Item> */}
+          <div>
+            <FormInput type='text' size='large' name='message' label='Message' />
+          </div>
+          {/* <div>
+            <FormInput
+              type='text'
+              size='large'
+              name='message'
+              label='Message'
+            />
+          </div> */}
+          {/* <Form.Item>
             <Form.Item
-              name="remember"
-              valuePropName="checked"
+              name='remember'
+              valuePropName='checked'
               noStyle
               rules={[
                 {
                   validator: (_, value) =>
                     value
                       ? Promise.resolve()
-                      : Promise.reject("Should accept agreement"),
+                      : Promise.reject('Should accept agreement'),
                 },
               ]}
             >
               <Checkbox>I agree with terms and conditions.</Checkbox>
             </Form.Item>
-          </Form.Item>
-          <Form.Item>
+          </Form.Item> */}
+          {/* <Form.Item>
             <Button
-              type="primary"
-              htmlType="submit"
-              className="login-form-button"
+              type='primary'
+              htmlType='submit'
+              className='login-form-button'
             >
               Submit
             </Button>
-          </Form.Item>
+          </Form.Item> */}
+          <Button
+            style={{
+              display: 'block',
+              marginTop: '5px',
+            }}
+            loading={isLoading}
+            htmlType='submit'
+            type='primary'
+          >
+            Contact Us
+          </Button>
         </Form>
       </div>
     </div>
-  );
+  )
 };
 
 export default ContactPage;
