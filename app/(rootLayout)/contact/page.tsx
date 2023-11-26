@@ -1,62 +1,65 @@
 "use client";
-import Form from '@/components/Forms/Form'
+import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
+import FormTextArea from "@/components/Forms/FormTextArea";
 import { useCreateContactMutation } from "@/redux/api/contactApi";
-import { CreateContactFormType, createContactResolver } from "@/schemas/contact";
+import {
+  CreateContactFormType,
+  createContactResolver,
+} from "@/schemas/contact";
 import { Button, Checkbox, message } from "antd";
 import { SubmitHandler } from "react-hook-form";
 // const { TextArea } = Input;
 
 const ContactPage = () => {
-  const [createContact, { isLoading }] = useCreateContactMutation()
-
+  const [createContact, { isLoading }] = useCreateContactMutation();
 
   const onSubmit: SubmitHandler<CreateContactFormType> = async (data) => {
     try {
-      const res = await createContact({ ...data }).unwrap()
-      if (!!res) {
-        message.success('Email sent successfully')
+      const res = await createContact({ ...data }).unwrap();
+      if (res) {
+        message.success("Email sent successfully");
       }
-      
     } catch (error: any) {
-      message.error(error?.data?.message || 'Something went wrong')
+      message.error(error?.data?.message || "Something went wrong");
     }
-  }
+  };
   return (
-    <div id='contact' className='block contactBlock'>
-      <div className='container-fluid'>
-        <div className='titleHolder'>
+    <div id="contact" className="block contactBlock">
+      <div className="container-fluid">
+        <div className="titleHolder">
           <h2>Get in Touch</h2>
         </div>
         <Form
           onSubmit={onSubmit}
           resolver={createContactResolver}
-          // name='normal_login'
-          // className='login-form'
-          // initialValues={{ remember: true }}
         >
           <div>
-            <FormInput type='text' size='large' name='name' label='Name' />
+            <FormInput type="text" size="large" name="name" label="Name" />
           </div>
           <div>
-            <FormInput type='email' size='large' name='email' label='Email' />
+            <FormInput type="email" size="large" name="email" label="Email" />
           </div>
           <div>
-            <FormInput type='text' size='large' name='phone' label='Phone' />
+            <FormInput type="text" size="large" name="phone" label="Phone" />
           </div>
           <div>
             <FormInput
-              type='text'
-              size='large'
-              name='subject'
-              label='Subject'
+              type="text"
+              size="large"
+              name="subject"
+              label="Subject"
             />
           </div>
           {/* <Form.Item name='message'>
             <TextArea name='message' size='large' placeholder='Message' />
           </Form.Item> */}
           <div>
-            <FormInput type='text' size='large' name='message' label='Message' />
+            <FormTextArea
+              label="Message"
+              name="message"
+              placeholder="Write your message here"
+            />
           </div>
           {/* <div>
             <FormInput
@@ -94,19 +97,19 @@ const ContactPage = () => {
           </Form.Item> */}
           <Button
             style={{
-              display: 'block',
-              marginTop: '5px',
+              display: "block",
+              marginTop: "5px",
             }}
             loading={isLoading}
-            htmlType='submit'
-            type='primary'
+            htmlType="submit"
+            type="primary"
           >
             Contact Us
           </Button>
         </Form>
       </div>
     </div>
-  )
+  );
 };
 
 export default ContactPage;
