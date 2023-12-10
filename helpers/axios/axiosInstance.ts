@@ -1,9 +1,8 @@
 import { authKey } from '@/constants/storageKey'
-import { getNewAccessToken } from '@/services/auth.service'
-import { IGenericErrorResponse, ResponseSuccessType } from '@/types'
+import { getNewAccessToken, removeUserInfo } from '@/services/auth.service'
+import { ResponseSuccessType } from '@/types'
 import { getFromLocalStorage, setToLocalStorage } from '@/utils/local-storage'
 import axios from 'axios'
-
 const instance = axios.create()
 instance.defaults.headers.post['Content-Type'] = 'application/json'
 instance.defaults.headers['Accept'] = 'application/json'
@@ -12,11 +11,9 @@ instance.defaults.timeout = 60000
 instance.interceptors.request.use(
   function (config) {
     const accessToken = getFromLocalStorage(authKey)
-
     if (accessToken) {
       config.headers.Authorization = accessToken
     }
-
     return config
   },
   function (error) {
@@ -34,23 +31,27 @@ instance.interceptors.response.use(
     return responseObject
   },
   async function (error) {
-    const config = error?.config
-    if (error?.response?.status === 403 && !config?.sent) {
-      config.sent = true
-      const response = await getNewAccessToken()
-      const accessToken = response?.data?.accessToken
-      if (accessToken) {
-        config.headers.Authorization = accessToken
-        setToLocalStorage(authKey, accessToken)
-        return instance(config)
-      } else {
-        window.location.href = '/login'
-      }
-    } else {
-      const responseObject: IGenericErrorResponse = {
-        statusCode: error?.response?.data?.statusCode || 500,
-        message: error?.response?.data?.message || 'Something went wrong',
-        errorMessages: error?.response?.data?.errorMessages,
+    if (error.response) {
+      const config = error?.config
+      if (
+        error.response.status === 401 &&
+        error.response.data.message === 'jwt expired' &&
+        !config._retry
+      ) {
+        config._retry = true
+        try {
+          const response = await getNewAccessToken()
+          const accessToken = response?.data?.accessToken
+          if (accessToken) {
+            config.headers.Authorization = accessToken
+            setToLocalStorage(authKey, accessToken)
+            return instance(config)
+          }
+          return 
+        } catch (_error) {
+          removeUserInfo(authKey)
+          return window.location.href = '/login' || Promise.reject(_error)
+        }
       }
       return Promise.reject(error)
     }
